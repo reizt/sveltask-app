@@ -7,11 +7,15 @@ env:
 ignorePatterns:
   - /*.js
   - /vitest.config.ts
+plugins:
+  - '@typescript-eslint'
+  - tailwindcss
 extends:
   - eslint:recommended
   - plugin:svelte/recommended
   - standard-with-typescript
   - eslint-config-prettier
+  - plugin:tailwindcss/recommended
 parser: '@typescript-eslint/parser'
 parserOptions:
   sourceType: module
@@ -51,3 +55,9 @@ rules:
   '@typescript-eslint/prefer-ts-expect-error': off
   '@typescript-eslint/ban-types': off
   '@typescript-eslint/ban-ts-comment': off
+
+  # Tailwind
+  tailwindcss/no-custom-classname:
+    - warn
+    - whitelist: []
+  tailwindcss/enforces-negative-arbitrary-values: off
