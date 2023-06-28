@@ -1,59 +1,77 @@
-<style>
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 0.6;
-  }
+<script lang="ts">
+  import TaskCard from './TaskCard.svelte';
+  import TaskPopUp from './TaskPopUp.svelte';
+  import { sampleTasks, type Task, type TaskStatus } from './task';
 
-  h1 {
-    width: 100%;
-  }
+  const tasks = sampleTasks;
 
-  .welcome {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding: 0 0 calc(100% * 495 / 2048) 0;
-  }
+  // States
+  let showingTask: Task | null = null;
+  let adding: boolean = false;
 
-  .welcome img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    display: block;
+  const tasksByStatus: Record<TaskStatus, Task[]> = {
+    created: [],
+    progress: [],
+    completed: [],
+  };
+  for (const task of tasks) {
+    tasksByStatus[task.status].push(task);
   }
-</style>
+  const statuses: TaskStatus[] = ['created', 'progress', 'completed'];
+  const statusLabels: Record<TaskStatus, string> = {
+    created: 'Created',
+    progress: 'In Progress',
+    completed: 'Completed',
+  };
 
-<script>
-  import welcomeFallback from '$lib/images/svelte-welcome.png';
-  import welcome from '$lib/images/svelte-welcome.webp';
-  import Counter from './Counter.svelte';
+  const openAdd = (status: TaskStatus) => {
+    adding = true;
+    showingTask = null;
+  };
+  const taskOnDragStart = () => {
+    //
+  };
+  const openTask = (task: Task) => {
+    showingTask = task;
+  };
+  const closeTask = () => {
+    showingTask = null;
+  };
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (showingTask == null) return;
+    if (e.key === 'Escape') {
+      closeTask();
+    }
+  };
 </script>
 
-<svelte:head>
-  <title>Home</title>
-  <meta name="description" content="Svelte demo app" />
-</svelte:head>
+<h1 class="text-32 font-bold mb-30">Current Tasks</h1>
+<div class="grid grid-cols-3 gap-x-24">
+  {#each statuses as status}
+    <div class="flex flex-col gap-y-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-16 text-gray-97">{statusLabels[status]}</h2>
+        <button
+          on:click={() => openAdd(status)}
+          class="flex justify-center items-center rounded-full bg-gray-dd hover:bg-gray-b9 focus:bg-gray-b9 duration-150 p-2"
+        >
+          <span class="material-icons text-gray-60 text-18">add</span>
+        </button>
+      </div>
+      {#each tasksByStatus[status] as task}
+        <TaskCard {task} onClick={() => openTask(task)} onDragStart={taskOnDragStart} />
+      {/each}
+    </div>
+  {/each}
+</div>
 
-<section>
-  <h1>
-    <span class="welcome">
-      <picture>
-        <source srcset={welcome} type="image/webp" />
-        <img src={welcomeFallback} alt="Welcome" />
-      </picture>
-    </span>
+<svelte:window on:keydown={handleKeydown} />
+{#if showingTask != null}
+  <button class="bg-black bg-opacity-50 block fixed inset-0 cursor-default" on:click={() => closeTask()} />
+  <TaskPopUp task={showingTask} />
+{/if}
 
-    to your new<br />SvelteKit app
-  </h1>
-
-  <h2>
-    try editing <strong>src/routes/+page.svelte</strong>
-  </h2>
-
-  <Counter />
-</section>
+{#if adding}
+  <button class="bg-black bg-opacity-50 block fixed inset-0 cursor-default" on:click={() => (adding = false)} />
+  <TaskPopUp />
+{/if}

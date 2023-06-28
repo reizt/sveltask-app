@@ -19,7 +19,6 @@
     "format:prettier": "prettier --write --loglevel silent src"
   },
   "devDependencies": {
-    "@fontsource/fira-mono": "^4.5.10",
     "@neoconfetti/svelte": "^1.0.0",
     "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "^2.0.0",
