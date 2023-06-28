@@ -1,22 +1,13 @@
 <script lang="ts">
+  import { replaceOne } from '../utils/replace-one';
+  import { sleep } from '../utils/sleep';
+  import PopUpMask from './PopUpMask.svelte';
+  import { sampleTasks, type Task, type TaskInput, type TaskStatus } from './task';
+  import TaskAddButton from './TaskAddButton.svelte';
   import TaskCard from './TaskCard.svelte';
   import TaskPopUp from './TaskPopUp.svelte';
-  import { sampleTasks, type Task, type TaskStatus } from './task';
 
-  const tasks = sampleTasks;
-
-  // States
-  let showingTask: Task | null = null;
-  let adding: boolean = false;
-
-  const tasksByStatus: Record<TaskStatus, Task[]> = {
-    created: [],
-    progress: [],
-    completed: [],
-  };
-  for (const task of tasks) {
-    tasksByStatus[task.status].push(task);
-  }
+  // Constants
   const statuses: TaskStatus[] = ['created', 'progress', 'completed'];
   const statusLabels: Record<TaskStatus, string> = {
     created: 'Created',
@@ -24,54 +15,87 @@
     completed: 'Completed',
   };
 
+  // States
+  let tasks = [...sampleTasks];
+  let editingId: string | null = null;
+  let addingStatus: TaskStatus | null = null;
+  let draggingId: string | null = null;
+
+  // Computed
+  $: editingTask = editingId != null ? tasks.find((task) => task.id === editingId) ?? null : null;
+  $: tasksByStatus = (() => {
+    const map: Record<TaskStatus, Task[]> = {
+      created: [],
+      progress: [],
+      completed: [],
+    };
+    for (const task of tasks) {
+      map[task.status].push(task);
+    }
+    return map;
+  })();
+
+  // Functions
   const openAdd = (status: TaskStatus) => {
-    adding = true;
-    showingTask = null;
-  };
-  const taskOnDragStart = () => {
-    //
-  };
-  const openTask = (task: Task) => {
-    showingTask = task;
-  };
-  const closeTask = () => {
-    showingTask = null;
+    addingStatus = status;
+    editingId = null;
   };
   const handleKeydown = (e: KeyboardEvent) => {
-    if (showingTask == null) return;
     if (e.key === 'Escape') {
-      closeTask();
+      if (editingId != null) editingId = null;
+      if (addingStatus != null) addingStatus = null;
     }
+  };
+  const createTask = async (values: TaskInput) => {
+    if (addingStatus == null) return;
+    const newTask: Task = {
+      id: Math.random().toString(36).slice(2),
+      status: addingStatus,
+      ...values,
+    };
+    tasks = [...tasks, newTask];
+    await sleep(300);
+    addingStatus = null;
+  };
+  const updateTask = async (values: TaskInput) => {
+    if (editingTask == null) return;
+    const newTask: Task = { ...editingTask, ...values };
+    tasks = replaceOne(tasks, 'id', newTask);
+    await sleep(300);
+    editingId = null;
+  };
+  const onDrop = (status: TaskStatus) => {
+    const draggingTask = tasks.find((task) => task.id === draggingId);
+    if (draggingTask == null) return;
+    const newTask: Task = { ...draggingTask, status };
+    tasks = replaceOne(tasks, 'id', newTask);
   };
 </script>
 
 <h1 class="text-32 font-bold mb-30">Current Tasks</h1>
 <div class="grid grid-cols-3 gap-x-24">
-  {#each statuses as status}
-    <div class="flex flex-col gap-y-12">
+  {#each statuses as status (status)}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div on:dragover|preventDefault on:drop|preventDefault={() => onDrop(status)} class="flex flex-col gap-y-12">
       <div class="flex items-center justify-between">
         <h2 class="text-16 text-gray-97">{statusLabels[status]}</h2>
-        <button
-          on:click={() => openAdd(status)}
-          class="flex justify-center items-center rounded-full bg-gray-dd hover:bg-gray-b9 focus:bg-gray-b9 duration-150 p-2"
-        >
-          <span class="material-icons text-gray-60 text-18">add</span>
-        </button>
+        <TaskAddButton on:click={() => openAdd(status)} />
       </div>
-      {#each tasksByStatus[status] as task}
-        <TaskCard {task} onClick={() => openTask(task)} onDragStart={taskOnDragStart} />
+      {#each tasksByStatus[status] as task (task.id)}
+        <TaskCard {task} on:click={() => (editingId = task.id)} on:dragstart={() => (draggingId = task.id)} />
       {/each}
     </div>
   {/each}
 </div>
 
 <svelte:window on:keydown={handleKeydown} />
-{#if showingTask != null}
-  <button class="bg-black bg-opacity-50 block fixed inset-0 cursor-default" on:click={() => closeTask()} />
-  <TaskPopUp task={showingTask} />
+
+{#if addingStatus != null}
+  <PopUpMask on:click={() => (addingStatus = null)} />
+  <TaskPopUp onSubmit={createTask} />
 {/if}
 
-{#if adding}
-  <button class="bg-black bg-opacity-50 block fixed inset-0 cursor-default" on:click={() => (adding = false)} />
-  <TaskPopUp />
+{#if editingTask != null}
+  <PopUpMask on:click={() => (editingId = null)} />
+  <TaskPopUp task={editingTask} onSubmit={updateTask} />
 {/if}

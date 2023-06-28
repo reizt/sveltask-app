@@ -58,6 +58,7 @@ module.exports = {
     spacing: { ...remsMap, ...nonNumericals },
     fontSize: remsMap,
     borderRadius: { ...remsMap, full: '100%' },
+    borderWidth: pxsToRemsMap([0, 1, 2, 3, 4, 5]),
     boxShadow: {
       land: '0 0 0.8rem 0 rgba(0, 0, 0, 0.1)',
     },
