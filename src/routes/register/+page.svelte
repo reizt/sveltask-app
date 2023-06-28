@@ -1,8 +1,8 @@
 <script lang="ts">
+  import AppSymbol from '#/components/AppSymbol.svelte';
+  import { signInFields, signInInputSchema, type SignInInput } from '#/defs/sign-in';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
-  import AppSymbol from '../../components/AppSymbol.svelte';
-  import { signInFields, signInInputSchema, type SignInInput } from '../../defs/sign-in';
 
   const onSubmit = (values: SignInInput) => {
     //

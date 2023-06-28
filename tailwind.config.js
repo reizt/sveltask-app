@@ -50,6 +50,8 @@ module.exports = {
         97: '#97999b',
         b9: '#b9b9b9',
         dd: '#dddddd',
+        e0: '#e0e0e0',
+        f0: '#f0f0f0',
         f9: '#f9f9f9',
       },
       // primary: {
