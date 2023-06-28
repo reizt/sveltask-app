@@ -59,5 +59,6 @@ rules:
   # Tailwind
   tailwindcss/no-custom-classname:
     - warn
-    - whitelist: []
+    - whitelist:
+        - material-icons
   tailwindcss/enforces-negative-arbitrary-values: off

@@ -4,13 +4,13 @@
   import TaskCard from '#/components/TaskCard.svelte';
   import TaskPopUp from '#/components/TaskPopUp.svelte';
   import { sampleTasks, type Task, type TaskInput, type TaskStatus } from '#/defs/task';
-  import { currentUser } from '#/store/current-user';
+  import { currentUserWT } from '#/store/current-user';
   import { replaceOne } from '#/utils/replace-one';
   import { sleep } from '#/utils/sleep';
   import type { PageData } from './$types';
 
   export let data: PageData;
-  currentUser.set(data.currentUser);
+  currentUserWT.set(data.currentUserWT);
 
   // Constants
   const statuses: TaskStatus[] = ['created', 'progress', 'completed'];
@@ -77,14 +77,20 @@
   };
 </script>
 
-<h1 class="mb-20 text-32 font-bold">Board</h1>
+<svelte:head>
+  <title>Board | TODO APP</title>
+</svelte:head>
+
+<div class="mb-20 flex justify-between">
+  <h1 class="text-32 font-bold">Board</h1>
+  <TaskAddButton on:click={() => openAdd('created')} />
+</div>
 <div class="flex gap-x-24">
   {#each statuses as status (status)}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:dragover|preventDefault on:drop|preventDefault={() => onDrop(status)} class="flex w-240 flex-col gap-y-12">
       <div class="flex items-center justify-between">
-        <h2 class="text-16 text-gray-97">{statusLabels[status]}</h2>
-        <TaskAddButton on:click={() => openAdd(status)} />
+        <h2 class="text-16 text-muted">{statusLabels[status]}</h2>
       </div>
       {#each tasksByStatus[status] as task (task.id)}
         <TaskCard {task} on:click={() => (editingId = task.id)} on:dragstart={() => (draggingId = task.id)} />

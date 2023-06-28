@@ -7,7 +7,6 @@ const keysToMap = (keys, toValue) => {
 };
 
 const pxsToRemsMap = (pxs) => keysToMap(pxs, (px) => `${px / 10}rem`);
-const sameMap = (keys) => keysToMap(keys, (k) => k);
 
 const remsMap = pxsToRemsMap(
   new Set(
@@ -35,29 +34,18 @@ const remsMap = pxsToRemsMap(
 
 const nonNumericals = { 'screen-x': '100vw', 'screen-y': '100vh', auto: 'auto', full: '100%' };
 
+const createColorMap = (colors) => {
+  return keysToMap(colors, (color) => `rgb(var(--${color}))`);
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{ts,svelte}'],
+  darkMode: 'class',
   theme: {
     colors: {
       transparent: 'transparent',
-      white: '#ffffff',
-      black: '#000000',
-      gray: {
-        32: '#323435',
-        50: '#505050',
-        60: '#606060',
-        97: '#97999b',
-        b9: '#b9b9b9',
-        dd: '#dddddd',
-        e0: '#e0e0e0',
-        f0: '#f0f0f0',
-        f9: '#f9f9f9',
-      },
-      // primary: {
-      //   DEFAULT: '#4063e3',
-      //   light: '#8c9fec',
-      // },
+      ...createColorMap(['border', 'background', 'foreground', 'primary', 'secondary', 'muted', 'strong', 'accent']),
     },
     spacing: { ...remsMap, ...nonNumericals },
     fontSize: remsMap,

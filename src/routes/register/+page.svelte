@@ -1,18 +1,23 @@
 <script lang="ts">
   import AppSymbol from '#/components/AppSymbol.svelte';
-  import { signInFields, signInInputSchema, type SignInInput } from '#/defs/sign-in';
+  import RegisterButton from '#/components/RegisterButton.svelte';
+  import { logInFields, logInInputSchema, type LogInInput } from '#/defs/log-in';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
 
-  const onSubmit = (values: SignInInput) => {
+  const onSubmit = (values: LogInInput) => {
     //
   };
 
-  const { form } = createForm<SignInInput>({
-    extend: validator({ schema: signInInputSchema }),
+  const { form, isValid } = createForm<LogInInput>({
+    extend: validator({ schema: logInInputSchema }),
     onSubmit,
   });
 </script>
+
+<svelte:head>
+  <title>Register | TODO APP</title>
+</svelte:head>
 
 <div class="flex h-screen-y items-center justify-center">
   <div class="w-300 pb-100">
@@ -24,19 +29,14 @@
       <input
         type="email"
         autocomplete="email"
-        name={signInFields.email}
+        name={logInFields.email}
         placeholder="name@example.com"
-        class="mb-10 h-40 w-full rounded-12 border-1 border-gray-dd px-12 text-14 outline-2 outline-offset-1 outline-gray-dd focus:outline"
+        class="mb-10 h-40 w-full rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-border focus:outline"
       />
-      <button
-        type="submit"
-        class="h-40 w-full rounded-12 bg-black text-14 text-white outline-2 outline-offset-1 outline-gray-dd hover:bg-gray-32 focus:outline active:outline"
-      >
-        Register With Email
-      </button>
+      <RegisterButton disabled={!isValid}>Register With Email</RegisterButton>
     </form>
     <div class="flex justify-center">
-      <a href="/login" class="text-14 text-gray-b9 underline hover:text-gray-97">Do you have an account? Login</a>
+      <a href="/login" class="text-14 text-muted underline hover:text-primary">Do you have an account? Login</a>
     </div>
   </div>
 </div>
