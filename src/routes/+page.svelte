@@ -1,11 +1,15 @@
 <script lang="ts">
+  import Header from '../components/Header.svelte';
+  import PopUpMask from '../components/PopUpMask.svelte';
+  import TaskAddButton from '../components/TaskAddButton.svelte';
+  import TaskCard from '../components/TaskCard.svelte';
+  import TaskPopUp from '../components/TaskPopUp.svelte';
+  import { sampleTasks, type Task, type TaskInput, type TaskStatus } from '../defs/task';
   import { replaceOne } from '../utils/replace-one';
   import { sleep } from '../utils/sleep';
-  import PopUpMask from './PopUpMask.svelte';
-  import { sampleTasks, type Task, type TaskInput, type TaskStatus } from './task';
-  import TaskAddButton from './TaskAddButton.svelte';
-  import TaskCard from './TaskCard.svelte';
-  import TaskPopUp from './TaskPopUp.svelte';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
 
   // Constants
   const statuses: TaskStatus[] = ['created', 'progress', 'completed'];
@@ -72,7 +76,8 @@
   };
 </script>
 
-<h1 class="text-32 font-bold mb-30">Current Tasks</h1>
+<Header currentUser={data.currentUser} />
+<h1 class="mb-20 text-32 font-bold">Tasks</h1>
 <div class="grid grid-cols-3 gap-x-24">
   {#each statuses as status (status)}
     <!-- svelte-ignore a11y-no-static-element-interactions -->

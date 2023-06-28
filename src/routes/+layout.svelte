@@ -1,11 +1,9 @@
 <script>
-  import Sidebar from './Sidebar.svelte';
   import './styles.css';
 </script>
 
-<div class="flex min-h-screen">
-  <Sidebar />
-  <main class="py-40 px-32">
+<div class="flex min-h-screen flex-col px-32 pt-80">
+  <main class="mx-auto">
     <slot />
   </main>
 </div>

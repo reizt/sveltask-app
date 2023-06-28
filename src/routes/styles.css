@@ -17,3 +17,7 @@ select,
 button {
   outline: none;
 }
+
+a {
+  outline-color: theme('colors.gray.97');
+}

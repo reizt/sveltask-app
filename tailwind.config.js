@@ -40,20 +40,22 @@ module.exports = {
   content: ['./src/**/*.{ts,svelte}'],
   theme: {
     colors: {
+      transparent: 'transparent',
       white: '#ffffff',
       black: '#000000',
       gray: {
         32: '#323435',
+        50: '#505050',
         60: '#606060',
         97: '#97999b',
         b9: '#b9b9b9',
         dd: '#dddddd',
         f9: '#f9f9f9',
       },
-      primary: {
-        DEFAULT: '#4063e3',
-        light: '#8c9fec',
-      },
+      // primary: {
+      //   DEFAULT: '#4063e3',
+      //   light: '#8c9fec',
+      // },
     },
     spacing: { ...remsMap, ...nonNumericals },
     fontSize: remsMap,
@@ -67,6 +69,9 @@ module.exports = {
       normal: 400,
       medium: 500,
       bold: 700,
+    },
+    fontFamily: {
+      'lexend-peta': ['Lexend Peta', 'sans-serif'],
     },
     extend: {
       maxWidth: remsMap,
