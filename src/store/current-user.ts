@@ -1,4 +1,4 @@
-import type { User } from '#/defs/user';
+import type { User } from '#/defs/model/model.type';
 import { writable } from 'svelte/store';
 
-export const currentUserWT = writable<User | null>(null);
+export const currentUser = writable<User | null>(null);

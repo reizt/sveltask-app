@@ -2,7 +2,7 @@ import { prefersDark } from '#/utils/prefers-dark';
 
 export type Theme = 'light' | 'dark';
 export const getTheme = (): Theme => {
-  const themeValue = localStorage.getItem('theme');
+  const themeValue = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : undefined;
   if (themeValue === 'dark') return 'dark';
   if (themeValue === 'light') return 'light';
   if (prefersDark()) return 'dark';
@@ -10,15 +10,23 @@ export const getTheme = (): Theme => {
 };
 
 export const setTheme = (theme: Theme) => {
-  document.documentElement.classList.add(theme);
-  document.documentElement.classList.remove(theme === 'light' ? 'dark' : 'light');
+  const root = document.getElementById('root');
+  if (root == null) return;
+  root.classList.add(theme);
+  root.classList.remove(theme === 'light' ? 'dark' : 'light');
   localStorage.setItem('theme', theme);
+  syncThemeToDocument();
+};
+
+export const syncThemeToDocument = () => {
+  const theme = localStorage.getItem('theme');
+  const html = document.documentElement;
   if (theme === 'light') {
-    document.documentElement.style.backgroundColor = 'rgb(255 255 255)';
-    document.documentElement.style.color = 'rgb(15 23 42)';
+    html.style.backgroundColor = 'rgb(255 255 255)';
+    html.style.color = 'rgb(15 23 42)';
   }
   if (theme === 'dark') {
-    document.documentElement.style.backgroundColor = 'rgb(3 7 17)';
-    document.documentElement.style.color = 'rgb(248 250 252)';
+    html.style.backgroundColor = 'rgb(3 7 17)';
+    html.style.color = 'rgb(248 250 252)';
   }
 };

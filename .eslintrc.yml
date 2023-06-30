@@ -31,6 +31,7 @@ overrides:
 rules:
   # eslint
   semi: off
+  camelcase: off
 
   # @typescript-eslint
   '@typescript-eslint/array-type':
@@ -55,10 +56,12 @@ rules:
   '@typescript-eslint/prefer-ts-expect-error': off
   '@typescript-eslint/ban-types': off
   '@typescript-eslint/ban-ts-comment': off
+  '@typescript-eslint/naming-convention': off
 
   # Tailwind
   tailwindcss/no-custom-classname:
     - warn
     - whitelist:
         - material-icons
+        - _*
   tailwindcss/enforces-negative-arbitrary-values: off

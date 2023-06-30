@@ -8,7 +8,7 @@
 }
 
 @layer base {
-  :root {
+  #root.light {
     color-scheme: light dark;
     --background: 255 255 255;
     --foreground: 15, 23, 42;
@@ -21,7 +21,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    html:not(.light) {
+    #root:not(.light) {
       --background: 3 7 17;
       --foreground: 225, 231, 239;
       --border: 29 40 58;
@@ -33,7 +33,7 @@
     }
   }
 
-  .dark {
+  #root.dark {
     --background: 3 7 17;
     --foreground: 225, 231, 239;
     --border: 29 40 58;

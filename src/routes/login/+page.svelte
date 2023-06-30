@@ -1,16 +1,23 @@
 <script lang="ts">
+  import { callApi } from '#/client/api';
   import AppSymbol from '#/components/AppSymbol.svelte';
   import RegisterButton from '#/components/RegisterButton.svelte';
-  import { logInFields, logInInputSchema, type LogInInput } from '#/defs/log-in';
+  import { AttemptLogin } from '#/defs/core/AttemptLogin';
+  import type { InferBody } from '#/defs/core/_operation';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
 
-  const onSubmit = (values: LogInInput) => {
-    //
+  type Input = InferBody<typeof AttemptLogin>;
+  const onSubmit = async (values: Input) => {
+    try {
+      await callApi(AttemptLogin, values);
+    } catch (err) {
+      //
+    }
   };
 
-  const { form, isValid } = createForm<LogInInput>({
-    extend: validator({ schema: logInInputSchema }),
+  const { form, isValid } = createForm<Input>({
+    extend: validator({ schema: AttemptLogin.request.body }),
     onSubmit,
   });
 </script>
@@ -29,14 +36,14 @@
       <input
         type="email"
         autocomplete="email"
-        name={logInFields.email}
+        name="email"
         placeholder="name@example.com"
         class="mb-10 h-40 w-full rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-border focus:outline"
       />
       <RegisterButton disabled={!isValid}>Sign In With Email</RegisterButton>
     </form>
-    <div class="flex justify-center">
+    <!-- <div class="flex justify-center">
       <a href="/register" class="text-14 text-muted underline hover:text-primary">Don't you have an account yet? Register</a>
-    </div>
+    </div> -->
   </div>
 </div>

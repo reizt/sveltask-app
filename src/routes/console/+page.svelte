@@ -2,34 +2,44 @@
   import PopUpMask from '#/components/PopUpMask.svelte';
   import TaskAddButton from '#/components/TaskAddButton.svelte';
   import TaskCard from '#/components/TaskCard.svelte';
+  import TaskCardSkeleton from '#/components/TaskCardSkeleton.svelte';
   import TaskPopUp from '#/components/TaskPopUp.svelte';
-  import { sampleTasks, type Task, type TaskInput, type TaskStatus } from '#/defs/task';
-  import { currentUserWT } from '#/store/current-user';
+  import type { TaskPopUpInput } from '#/components/TaskPopUp.type';
+  import type { TMod } from '#/defs/model/model';
+  import { sampleTasks } from '#/defs/samples';
+  import { currentUser } from '#/store/current-user';
   import { replaceOne } from '#/utils/replace-one';
   import { sleep } from '#/utils/sleep';
+  import { onMount } from 'svelte';
   import type { PageData } from './$types';
 
   export let data: PageData;
-  currentUserWT.set(data.currentUserWT);
+  currentUser.set(data.currentUser);
 
   // Constants
-  const statuses: TaskStatus[] = ['created', 'progress', 'completed'];
-  const statusLabels: Record<TaskStatus, string> = {
+  const statuses: TMod.Task['status'][] = ['created', 'progress', 'completed'];
+  const statusLabels: Record<TMod.Task['status'], string> = {
     created: 'Created',
     progress: 'In Progress',
     completed: 'Completed',
   };
 
   // States
-  let tasks = [...sampleTasks];
+  let tasks: TMod.Task[] = [...sampleTasks];
+  let isLoading: boolean = true;
   let editingId: string | null = null;
-  let addingStatus: TaskStatus | null = null;
+  let addingStatus: TMod.Task['status'] | null = null;
   let draggingId: string | null = null;
+
+  onMount(async () => {
+    await sleep(500);
+    isLoading = false;
+  });
 
   // Computed
   $: editingTask = editingId != null ? tasks.find((task) => task.id === editingId) ?? null : null;
   $: tasksByStatus = (() => {
-    const map: Record<TaskStatus, Task[]> = {
+    const map: Record<TMod.Task['status'], TMod.Task[]> = {
       created: [],
       progress: [],
       completed: [],
@@ -41,7 +51,7 @@
   })();
 
   // Functions
-  const openAdd = (status: TaskStatus) => {
+  const openAdd = (status: TMod.Task['status']) => {
     addingStatus = status;
     editingId = null;
   };
@@ -51,10 +61,11 @@
       if (addingStatus != null) addingStatus = null;
     }
   };
-  const createTask = async (values: TaskInput) => {
+  const createTask = async (values: TaskPopUpInput) => {
     if (addingStatus == null) return;
-    const newTask: Task = {
+    const newTask: TMod.Task = {
       id: Math.random().toString(36).slice(2),
+      userId: data.currentUser!.id,
       status: addingStatus,
       ...values,
     };
@@ -62,17 +73,17 @@
     await sleep(300);
     addingStatus = null;
   };
-  const updateTask = async (values: TaskInput) => {
+  const updateTask = async (values: TaskPopUpInput) => {
     if (editingTask == null) return;
-    const newTask: Task = { ...editingTask, ...values };
+    const newTask: TMod.Task = { ...editingTask, ...values };
     tasks = replaceOne(tasks, 'id', newTask);
     await sleep(300);
     editingId = null;
   };
-  const onDrop = (status: TaskStatus) => {
+  const updateTaskStatus = (status: TMod.Task['status']) => {
     const draggingTask = tasks.find((task) => task.id === draggingId);
     if (draggingTask == null) return;
-    const newTask: Task = { ...draggingTask, status };
+    const newTask: TMod.Task = { ...draggingTask, status };
     tasks = replaceOne(tasks, 'id', newTask);
   };
 </script>
@@ -88,13 +99,18 @@
 <div class="flex gap-x-24">
   {#each statuses as status (status)}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div on:dragover|preventDefault on:drop|preventDefault={() => onDrop(status)} class="flex w-240 flex-col gap-y-12">
+    <div on:dragover|preventDefault on:drop|preventDefault={() => updateTaskStatus(status)} class="flex w-240 flex-col gap-y-12">
       <div class="flex items-center justify-between">
         <h2 class="text-16 text-muted">{statusLabels[status]}</h2>
       </div>
-      {#each tasksByStatus[status] as task (task.id)}
-        <TaskCard {task} on:click={() => (editingId = task.id)} on:dragstart={() => (draggingId = task.id)} />
-      {/each}
+      {#if isLoading}
+        <TaskCardSkeleton />
+        <TaskCardSkeleton />
+      {:else}
+        {#each tasksByStatus[status] as task (task.id)}
+          <TaskCard {task} on:click={() => (editingId = task.id)} on:dragstart={() => (draggingId = task.id)} />
+        {/each}
+      {/if}
     </div>
   {/each}
 </div>
