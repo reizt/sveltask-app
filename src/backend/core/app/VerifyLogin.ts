@@ -1,8 +1,6 @@
-import type { Context } from '%b/core/context';
-import type { InferBackendIn, InferBackendOut } from '%b/core/types';
-import type * as defs from '%d/procedures';
+import type { Fun } from '%b/core/types';
 
-export const VerifyLogin = async (input: InferBackendIn<typeof defs.VerifyLogin>, ctx: Context): Promise<InferBackendOut<typeof defs.VerifyLogin>> => {
+export const VerifyLogin: Fun<'VerifyLogin'> = async (input, ctx) => {
   console.log('VerifyLogin', input);
   return { authToken: '1234567890' };
 };

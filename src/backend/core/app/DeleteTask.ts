@@ -1,7 +1,5 @@
-import type { Context } from '%b/core/context';
-import type { InferBackendIn, InferBackendOut } from '%b/core/types';
-import type * as defs from '%d/procedures';
+import type { Fun } from '%b/core/types';
 
-export const DeleteTask = async (input: InferBackendIn<typeof defs.DeleteTask>, ctx: Context): Promise<InferBackendOut<typeof defs.DeleteTask>> => {
+export const DeleteTask: Fun<'DeleteTask'> = async (input, ctx) => {
   console.log('DeleteTask', input);
 };

@@ -1,5 +1,7 @@
 import type { Procedure } from '%d/procedure';
+import type * as defs from '%d/procedures';
 import type { z } from 'zod';
+import type { Context } from './context';
 
 type OptionalInfer<T, F> = T extends z.ZodTypeAny ? z.infer<T> : F;
 export type InferBackendIn<T extends Procedure> = OptionalInfer<T['request']['body'], {}> &
@@ -16,3 +18,6 @@ export type InferBackendOut<T extends Procedure> = ResponseBodyOf<T> extends z.Z
   : ResponseCookiesOf<T> extends z.ZodTypeAny
   ? z.infer<ResponseCookiesOf<T>>
   : void;
+
+type ProcedureId = keyof typeof defs;
+export type Fun<P extends ProcedureId> = (input: InferBackendIn<(typeof defs)[P]>, ctx: Context) => Promise<InferBackendOut<(typeof defs)[P]>>;
