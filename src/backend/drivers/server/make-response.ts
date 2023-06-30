@@ -6,7 +6,7 @@ export const makeResponse = (response: ApiResponse): Response => {
     let setCookie = '';
     for (const key in response.cookies) {
       const value = response.cookies[key];
-      setCookie += `${key}=${value ?? ''}; `;
+      setCookie += `${key}=${value ?? ''};`;
     }
     headers.append('Set-Cookie', setCookie);
   }
