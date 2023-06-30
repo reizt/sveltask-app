@@ -1,7 +1,7 @@
-import type { ApiRequest } from '#/defs/api/interface';
-import type { Operation } from '#/defs/core/_operation';
+import type { ApiRequest } from '%d/api';
+import type { Procedure } from '%d/procedure';
 
-export const makeInput = (request: ApiRequest, def: Operation): any => {
+export const makeInput = (request: ApiRequest, def: Procedure): any => {
   const input: Record<string, any> = {};
   for (const key in def.request.body?.shape) {
     if (request.body == null) continue;

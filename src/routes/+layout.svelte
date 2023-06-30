@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getTheme, setTheme, syncThemeToDocument } from '#/components/theme';
+  import { getTheme, setTheme, syncThemeToDocument } from '%c/components/theme';
   import { onMount } from 'svelte';
   import './styles.css';
 

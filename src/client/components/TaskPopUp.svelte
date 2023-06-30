@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TMod } from '#/defs/model/model';
+  import type { TMod } from '%d/model';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
   import { onMount } from 'svelte';

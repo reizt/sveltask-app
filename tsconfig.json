@@ -16,9 +16,10 @@
   "exclude": ["node_modules/**", ".svelte-kit/[!ambient.d.ts]**", "src/service-worker.js", "src/service-worker.ts", "src/service-worker.d.ts"],
   "compilerOptions": {
     "paths": {
-      "#/*": ["./src/*"],
-      "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
+      "%c/*": ["./src/client/*"],
+      "%b/*": ["./src/backend/*"],
+      "%d/*": ["./src/defs/*"],
+      "%u/*": ["./src/utils/*"]
     },
     "rootDirs": [".", "./.svelte-kit/types"],
     "lib": ["esnext", "DOM", "DOM.Iterable"],

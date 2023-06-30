@@ -1,15 +1,15 @@
 <script lang="ts">
-  import PopUpMask from '#/components/PopUpMask.svelte';
-  import TaskAddButton from '#/components/TaskAddButton.svelte';
-  import TaskCard from '#/components/TaskCard.svelte';
-  import TaskCardSkeleton from '#/components/TaskCardSkeleton.svelte';
-  import TaskPopUp from '#/components/TaskPopUp.svelte';
-  import type { TaskPopUpInput } from '#/components/TaskPopUp.type';
-  import type { TMod } from '#/defs/model/model';
-  import { sampleTasks } from '#/defs/samples';
-  import { currentUser } from '#/store/current-user';
-  import { replaceOne } from '#/utils/replace-one';
-  import { sleep } from '#/utils/sleep';
+  import PopUpMask from '%c/components/PopUpMask.svelte';
+  import TaskAddButton from '%c/components/TaskAddButton.svelte';
+  import TaskCard from '%c/components/TaskCard.svelte';
+  import TaskCardSkeleton from '%c/components/TaskCardSkeleton.svelte';
+  import TaskPopUp from '%c/components/TaskPopUp.svelte';
+  import type { TaskPopUpInput } from '%c/components/TaskPopUp.type';
+  import { currentUser } from '%c/store/current-user';
+  import type { TMod } from '%d/model';
+  import { sampleTasks } from '%d/samples';
+  import { replaceOne } from '%u/replace-one';
+  import { sleep } from '%u/sleep';
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
 

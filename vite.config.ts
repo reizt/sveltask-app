@@ -12,7 +12,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '#': resolve(__dirname, './src'),
+      '%c/*': resolve(__dirname, './src/client'),
+      '%b/*': resolve(__dirname, './src/backend'),
+      '%d/*': resolve(__dirname, './src/defs'),
+      '%u/*': resolve(__dirname, './src/utils'),
     },
   },
 });

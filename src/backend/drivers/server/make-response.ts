@@ -1,4 +1,4 @@
-import type { ApiResponse } from '#/defs/api/interface';
+import type { ApiResponse } from '%d/api';
 
 export const makeResponse = (response: ApiResponse): Response => {
   const headers = new Headers();

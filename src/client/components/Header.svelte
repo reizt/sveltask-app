@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type { User } from '#/defs/model/model.type';
+  import type { TMod } from '%d/model';
   import AccountPop from './AccountPop.svelte';
   import AppSymbol from './AppSymbol.svelte';
   import ThemeSwitch from './ThemeSwitch.svelte';
 
-  export let currentUser: User | null = null;
+  export let currentUser: TMod.User | null = null;
 </script>
 
 <div class="mb-10 flex h-60 items-center gap-x-10 border-b-1 border-border px-40 py-16">

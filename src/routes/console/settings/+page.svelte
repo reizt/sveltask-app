@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { UpdateCurrentUser } from '#/defs/core/UpdateCurrentUser';
-  import type { InferBody } from '#/defs/core/_operation';
-  import { currentUser } from '#/store/current-user';
+  import { currentUser } from '%c/store/current-user';
+  import type { InferBody } from '%d/procedure';
+  import { UpdateCurrentUser } from '%d/procedures';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
   import type { PageData } from './$types';

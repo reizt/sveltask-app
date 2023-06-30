@@ -1,4 +1,4 @@
-import type { ApiRequest, ApiResponse } from '#/defs/api/interface';
+import type { ApiRequest, ApiResponse } from '%d/api';
 import { makeRealPath } from './make-real-path';
 
 export const execApiRequest = async (req: ApiRequest): Promise<ApiResponse> => {

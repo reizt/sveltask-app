@@ -1,7 +1,6 @@
 import type { z } from 'zod';
 
-export type Operation = {
-  id: string;
+export type Procedure = {
   method: 'get' | 'post' | 'put' | 'patch' | 'delete';
   path: string;
   request: {
@@ -19,4 +18,4 @@ export type Operation = {
 
 type OptionalInfer<T, F> = T extends z.ZodTypeAny ? z.infer<T> : F;
 
-export type InferBody<T extends Operation> = OptionalInfer<T['request']['body'], undefined>;
+export type InferBody<T extends Procedure> = OptionalInfer<T['request']['body'], undefined>;

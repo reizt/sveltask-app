@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { callApi } from '#/client/api';
-  import AppSymbol from '#/components/AppSymbol.svelte';
-  import RegisterButton from '#/components/RegisterButton.svelte';
-  import { AttemptLogin } from '#/defs/core/AttemptLogin';
-  import type { InferBody } from '#/defs/core/_operation';
+  import { callApi } from '%c/api';
+  import AppSymbol from '%c/components/AppSymbol.svelte';
+  import RegisterButton from '%c/components/RegisterButton.svelte';
+  import type { InferBody } from '%d/procedure';
+  import { AttemptLogin } from '%d/procedures';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
 

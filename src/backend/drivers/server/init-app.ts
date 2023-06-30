@@ -1,4 +1,4 @@
-import { createApp } from '#/backend/core/create-app';
+import { createApp } from '%b/core/create-app';
 
 export const initApp = () => {
   const db = null;

@@ -1,7 +1,7 @@
-import type { ApiResponse } from '#/defs/api/interface';
-import type { Operation } from '#/defs/core/_operation';
+import type { ApiResponse } from '%d/api';
+import type { Procedure } from '%d/procedure';
 
-export const parseOutput = (output: any, def: Operation): ApiResponse => {
+export const parseOutput = (output: any, def: Procedure): ApiResponse => {
   const cookies: Record<string, any> = {};
   const omitKeys: string[] = [];
   if (def.response.cookies != null) {

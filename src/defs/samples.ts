@@ -1,4 +1,4 @@
-import type { TMod } from './model/model';
+import type { TMod } from './model';
 
 export const sampleTasks: TMod.Task[] = [
   {

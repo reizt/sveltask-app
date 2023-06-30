@@ -1,4 +1,4 @@
-import { CreateTask } from '#/defs/core/CreateTask';
+import { CreateTask } from '%d/procedures';
 import type { z } from 'zod';
 
 export const TaskPopUpSchema = CreateTask.request.body.shape.data.pick({

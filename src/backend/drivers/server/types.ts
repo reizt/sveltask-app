@@ -1,3 +1,3 @@
-import type * as defs from '#/defs/core';
+import type * as defs from '%d/procedures';
 
-export type OperationId = keyof typeof defs;
+export type ProcedureId = keyof typeof defs;

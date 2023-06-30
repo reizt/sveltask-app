@@ -1,5 +1,5 @@
-import type { InferBackendIn, InferBackendOut } from '#/backend/core/types';
-import type * as defs from '#/defs/core';
+import type { InferBackendIn, InferBackendOut } from '%b/core/types';
+import type * as defs from '%d/procedures';
 import { AttemptLogin } from './app/AttemptLogin';
 import { CreateTask } from './app/CreateTask';
 import { DeleteTask } from './app/DeleteTask';
@@ -9,14 +9,14 @@ import { UpdateTask } from './app/UpdateTask';
 import { VerifyLogin } from './app/VerifyLogin';
 import type { Context } from './context';
 
-type OperationId = keyof typeof defs;
+type ProcedureId = keyof typeof defs;
 
-type InOf<O extends OperationId> = InferBackendIn<(typeof defs)[O]>;
-type OutOf<O extends OperationId> = InferBackendOut<(typeof defs)[O]>;
+type InOf<O extends ProcedureId> = InferBackendIn<(typeof defs)[O]>;
+type OutOf<O extends ProcedureId> = InferBackendOut<(typeof defs)[O]>;
 
-type Before<O extends OperationId> = (input: InOf<O>, ctx: Context) => Promise<OutOf<O>>;
-type After<O extends OperationId> = (input: InOf<O>) => Promise<OutOf<O>>;
-const inject = <O extends OperationId>(handler: Before<O>, ctx: Context): After<O> => {
+type Before<O extends ProcedureId> = (input: InOf<O>, ctx: Context) => Promise<OutOf<O>>;
+type After<O extends ProcedureId> = (input: InOf<O>) => Promise<OutOf<O>>;
+const inject = <O extends ProcedureId>(handler: Before<O>, ctx: Context): After<O> => {
   return async (input) => await handler(input, ctx);
 };
 

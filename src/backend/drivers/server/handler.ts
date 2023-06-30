@@ -1,4 +1,4 @@
-import * as defs from '#/defs/core';
+import * as defs from '%d/procedures';
 import type { RequestHandler } from '@sveltejs/kit';
 import { initApp } from './init-app';
 import { makeInput } from './make-input';
@@ -11,12 +11,12 @@ export const svelteKitApiHandler: RequestHandler = async (event) => {
   if (parsedEvent == null) {
     return new Response(null, { status: 404 });
   }
-  const { request, operationId } = parsedEvent;
+  const { request, procedureId } = parsedEvent;
 
   const app = initApp();
-  const input = makeInput(request, defs[operationId]);
-  const output = await app[operationId](input);
-  const response = parseOutput(output, defs[operationId]);
+  const input = makeInput(request, defs[procedureId]);
+  const output = await app[procedureId](input);
+  const response = parseOutput(output, defs[procedureId]);
   console.log(`[SvelteKit] ${request.method} ${request.path} ${response.status}`);
   return makeResponse(response);
 };
