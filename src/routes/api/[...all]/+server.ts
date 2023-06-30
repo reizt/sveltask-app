@@ -1,4 +1,4 @@
-import { svelteKitApiHandler } from '%b/drivers/server/handler';
+import { svelteKitApiHandler } from '%b/server/handler';
 
 export const GET = svelteKitApiHandler;
 export const POST = svelteKitApiHandler;
