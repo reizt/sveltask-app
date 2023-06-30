@@ -18,7 +18,11 @@
     "lint:tsc": "tsc --noEmit",
     "format": "run-s format:prettier format:eslint",
     "format:eslint": "eslint . --fix",
-    "format:prettier": "prettier --write --loglevel silent src"
+    "format:prettier": "prettier --write --loglevel silent src",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:up": "drizzle-kit up:pg",
+    "db:check": "drizzle-kit check:pg",
+    "db:drop": "drizzle-kit drop"
   },
   "devDependencies": {
     "@neoconfetti/svelte": "^1.0.0",
@@ -31,6 +35,7 @@
     "@typescript-eslint/parser": "^5.45.0",
     "autoprefixer": "^10.4.14",
     "cssnano": "^6.0.1",
+    "drizzle-kit": "^0.19.2",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
@@ -55,7 +60,9 @@
   },
   "dependencies": {
     "@felte/validator-zod": "^1.0.16",
+    "drizzle-orm": "^0.27.0",
     "felte": "^1.2.11",
+    "postgres": "^3.3.5",
     "zod": "^3.21.4"
   }
 }

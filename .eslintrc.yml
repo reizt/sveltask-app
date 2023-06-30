@@ -6,7 +6,7 @@ env:
   node: true
 ignorePatterns:
   - /*.js
-  - /vitest.config.ts
+  - /*.cjs
 plugins:
   - '@typescript-eslint'
   - tailwindcss
@@ -57,6 +57,7 @@ rules:
   '@typescript-eslint/ban-types': off
   '@typescript-eslint/ban-ts-comment': off
   '@typescript-eslint/naming-convention': off
+  '@typescript-eslint/triple-slash-reference': off
 
   # Tailwind
   tailwindcss/no-custom-classname:
