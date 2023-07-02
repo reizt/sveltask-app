@@ -21,9 +21,3 @@ export const tasks = pgTable('tasks', {
     .notNull()
     .references(() => users.id),
 });
-
-export const verifications = pgTable('verifications', {
-  ...{ id, createdAt, updatedAt },
-  email: varchar('email', { length: 255 }).notNull(),
-  token: varchar('token', { length: 255 }).notNull(),
-});

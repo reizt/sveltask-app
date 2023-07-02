@@ -22,14 +22,6 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"email" varchar(255) NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "verifications" (
-	"id" varchar(36) PRIMARY KEY NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	"email" varchar(255) NOT NULL,
-	"token" varchar(255) NOT NULL
-);
---> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "tasks" ADD CONSTRAINT "tasks_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION

@@ -11,37 +11,37 @@
   #root.light {
     color-scheme: light dark;
     --background: 255 255 255;
-    --foreground: 15, 23, 42;
+    --foreground: 15 23 42;
     --border: 229 231 235;
     --primary: 15 23 42;
     --secondary: 241 245 249;
     --strong: 15 23 42;
-    --muted: 100, 116, 139;
-    --accent: 241, 245, 249;
+    --muted: 100 116 139;
+    --accent: 241 245 249;
   }
 
   @media (prefers-color-scheme: dark) {
     #root:not(.light) {
       --background: 3 7 17;
-      --foreground: 225, 231, 239;
+      --foreground: 225 231 239;
       --border: 29 40 58;
       --primary: 248 250 252;
       --secondary: 15 23 42;
       --strong: 248 250 252;
-      --muted: 127, 142, 163;
-      --accent: 29, 40, 58;
+      --muted: 127 142 163;
+      --accent: 29 40 58;
     }
   }
 
   #root.dark {
     --background: 3 7 17;
-    --foreground: 225, 231, 239;
+    --foreground: 225 231 239;
     --border: 29 40 58;
     --primary: 248 250 252;
     --secondary: 15 23 42;
     --strong: 248 250 252;
-    --muted: 127, 142, 163;
-    --accent: 29, 40, 58;
+    --muted: 127 142 163;
+    --accent: 29 40 58;
   }
 
   .material-icons {

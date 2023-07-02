@@ -14,10 +14,3 @@ export const mod_User = z.object({
   name: z.string(),
   email: z.string().email(),
 });
-
-export const mod_Verification = z.object({
-  id: val_id,
-  email: z.string().email(),
-  token: z.string().min(1),
-  expiresAt: z.number(),
-});

@@ -63,6 +63,15 @@ module.exports = {
     fontFamily: {
       'lexend-peta': ['Lexend Peta', 'sans-serif'],
     },
+    keyframes: {
+      spin: {
+        '0%': { transform: 'rotate(0deg)' },
+        '100%': { transform: 'rotate(360deg)' },
+      },
+    },
+    animation: {
+      loading: 'spin 1s linear infinite',
+    },
     extend: {
       maxWidth: remsMap,
       maxHeight: remsMap,

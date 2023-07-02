@@ -10,6 +10,9 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.{js,ts}'],
     globals: true,
   },
+  server: {
+    port: 6300,
+  },
   resolve: {
     alias: {
       '%c/*': resolve(__dirname, './src/client'),

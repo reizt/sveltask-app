@@ -1,14 +1,13 @@
-/// <reference types="node" />
+/// <reference types="vite/client" />
 
-declare module 'process' {
-  global {
-    namespace NodeJS {
-      interface ProcessEnv {
-        readonly NODE_ENV: 'development' | 'test' | 'production';
-        readonly DATABASE_URL: string;
-        readonly JWT_PRIVATE_KEY: string;
-        readonly JWT_PUBLIC_KEY: string;
-      }
-    }
-  }
+interface ImportMetaEnv {
+  readonly DATABASE_URL: string;
+  readonly JWT_PRIVATE_KEY: string;
+  readonly JWT_PUBLIC_KEY: string;
+  readonly SENDGRID_API_KEY: string;
+  readonly MAILER_FROM: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }

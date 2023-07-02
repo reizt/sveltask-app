@@ -13,7 +13,7 @@ export const svelteKitApiHandler: RequestHandler = async (event) => {
   }
   const { request, procedureId } = parsedEvent;
 
-  const app = initApp();
+  const app = await initApp();
   let input: any;
   try {
     input = parseRequest(request, defs[procedureId]);

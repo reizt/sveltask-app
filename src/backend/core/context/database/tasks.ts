@@ -14,5 +14,5 @@ export type Where = { id?: string; userId?: string };
 export type FindMany = { where: {} };
 export type FindFirst = { where: Where };
 export type Create = { data: TMod.Task };
-export type Update = { where: IdWhere; data: TMod.Task };
+export type Update = { where: IdWhere; data: Partial<TMod.Task> };
 export type Remove = { where: IdWhere };

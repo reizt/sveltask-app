@@ -1,5 +1,5 @@
+import type { AppSession } from '%b/core/context/app-session';
 import type { ISerializer } from '%b/core/context/serializer';
-import type { AppSession } from '%b/core/rules/app-session';
 import jwt from 'jsonwebtoken';
 
 export class JwtSerializer implements ISerializer {

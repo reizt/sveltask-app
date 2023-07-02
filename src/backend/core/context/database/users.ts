@@ -9,10 +9,10 @@ export type _Repository = {
 };
 
 export type IdWhere = { id: string };
-export type Where = { id?: string };
+export type Where = { id?: string; email?: string };
 
 export type FindMany = { where: {} };
 export type FindFirst = { where: Where };
 export type Create = { data: TMod.User };
-export type Update = { where: IdWhere; data: TMod.User };
+export type Update = { where: IdWhere; data: Partial<TMod.User> };
 export type Remove = { where: IdWhere };

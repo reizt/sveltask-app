@@ -14,5 +14,6 @@ export const parseOutput = (output: any, def: Procedure): ApiResponse => {
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete output[key];
   }
+  if (JSON.stringify(output) === '{}') output = undefined;
   return { body: output, status: def.response.successCode, cookies };
 };

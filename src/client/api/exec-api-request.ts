@@ -12,7 +12,10 @@ export const execApiRequest = async (req: ApiRequest): Promise<ApiResponse> => {
     mode: 'cors',
     credentials: 'include',
   });
-  const json = await res.json();
+  let json: any = null;
+  try {
+    json = await res.json();
+  } catch {}
   return {
     status: res.status,
     body: json,
