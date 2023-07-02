@@ -60,6 +60,7 @@ const coerceType = (value: any, schema: z.ZodTypeAny): any => {
   if (typeName === 'ZodString') return String(value);
   if (typeName === 'ZodNumber') return Number(value);
   if (typeName === 'ZodBoolean') return Boolean(value);
+  if (typeName === 'ZodDate') return new Date(value);
   if (typeName === 'ZodArray') {
     const array = Array.isArray(value) ? value : [value];
     return array.map((item) => coerceType(item, schema._def.type));

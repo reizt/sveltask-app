@@ -1,6 +1,6 @@
 <script lang="ts">
   import { prefersDark } from '%u/prefers-dark';
-  import { setTheme, type Theme } from './theme';
+  import { setTheme, type Theme } from '../store/theme';
 
   let showDropdown: boolean = false;
 

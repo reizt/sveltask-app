@@ -9,7 +9,6 @@
   import { currentUser } from '%c/store/current-user';
   import type { TMod } from '%d/model';
   import { CreateTask, DeleteTask, GetTasks, UpdateTask } from '%d/procedures';
-  import { sampleTasks } from '%d/samples';
   import { replaceOne } from '%u/replace-one';
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
@@ -26,7 +25,7 @@
   };
 
   // States
-  let tasks: TMod.Task[] = [...sampleTasks];
+  let tasks: TMod.Task[] = [];
   let isLoading: boolean = true;
   let editingId: string | null = null;
   let addingStatus: TMod.Task['status'] | null = null;
