@@ -5,7 +5,7 @@ export const execApiRequest = async (req: ApiRequest): Promise<ApiResponse> => {
   const path = makeRealPath(req.path, req.params);
   const res = await fetch(`/api${path}`, {
     method: req.method.toUpperCase(),
-    body: JSON.stringify(req.body),
+    body: req.body != null ? JSON.stringify(req.body) : null,
     headers: {
       'Content-Type': 'application/json',
     },

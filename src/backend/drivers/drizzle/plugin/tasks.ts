@@ -15,7 +15,7 @@ export const createTasksRepository = (db: PostgresJsDatabase): Tasks._Repository
 type Fn<T extends keyof Tasks._Repository> = WithDB<Tasks._Repository[T]>;
 
 const findMany: Fn<'findMany'> = async (db, args) => {
-  const rows = await db.select().from(tb.tasks);
+  const rows = await db.select().from(tb.tasks).where(eq(tb.tasks.userId, args.where.userId));
   return rows;
 };
 

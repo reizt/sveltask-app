@@ -37,12 +37,12 @@
       type="text"
       name="name"
       value={$currentUser?.name}
-      class="mb-10 h-40 w-full max-w-300 rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-border focus:outline"
+      class="mb-10 h-40 w-full max-w-300 rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-outline focus:outline"
     />
   </div>
   <button
     type="submit"
-    class="h-40 w-100 rounded-4 bg-primary text-14 text-secondary outline-2 outline-offset-1 outline-border hover:bg-primary/80 focus:outline active:outline"
+    class="h-40 w-100 rounded-4 bg-primary text-14 text-secondary outline-2 outline-offset-1 outline-outline hover:bg-primary/80 focus:outline active:outline"
   >
     Save
   </button>

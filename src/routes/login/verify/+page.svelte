@@ -47,9 +47,9 @@
         autocomplete="one-time-code"
         name="code"
         placeholder="6 digit code"
-        class="mb-10 h-40 w-full rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-border focus:outline"
+        class="mb-10 h-40 w-full rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-outline focus:outline"
       />
-      <RegisterButton disabled={!isValid || isSubmitting} loading={isSubmitting}>Verify</RegisterButton>
+      <RegisterButton disabled={!$isValid || isSubmitting} loading={isSubmitting}>Verify</RegisterButton>
     </form>
   </div>
 </div>

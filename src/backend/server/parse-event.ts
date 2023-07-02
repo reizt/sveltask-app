@@ -18,7 +18,12 @@ export const parseEvent = async <K extends string>(
     path = path.replace(new RegExp(`^${prefix}`), '');
   }
   const query = event.params as ApiRequest['query'];
-  const body = await event.request.json();
+  let body: any;
+  try {
+    body = await event.request.json();
+  } catch {
+    body = null;
+  }
   for (const procedureId in defs) {
     const procedure = defs[procedureId]!;
     if (method.toLowerCase() !== procedure.method.toLowerCase()) continue;

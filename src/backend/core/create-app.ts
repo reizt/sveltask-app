@@ -4,6 +4,7 @@ import { AttemptLogin } from './app/AttemptLogin';
 import { CreateTask } from './app/CreateTask';
 import { DeleteTask } from './app/DeleteTask';
 import { GetCurrentUser } from './app/GetCurrentUser';
+import { GetTasks } from './app/GetTasks';
 import { UpdateCurrentUser } from './app/UpdateCurrentUser';
 import { UpdateTask } from './app/UpdateTask';
 import { VerifyLogin } from './app/VerifyLogin';
@@ -31,5 +32,6 @@ export const createApp = (ctx: Context): App => {
     UpdateCurrentUser: inject<'UpdateCurrentUser'>(UpdateCurrentUser, ctx),
     UpdateTask: inject<'UpdateTask'>(UpdateTask, ctx),
     VerifyLogin: inject<'VerifyLogin'>(VerifyLogin, ctx),
+    GetTasks: inject<'GetTasks'>(GetTasks, ctx),
   };
 };

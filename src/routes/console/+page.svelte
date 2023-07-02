@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { callApi } from '%c/api';
   import PopUpMask from '%c/components/PopUpMask.svelte';
   import TaskAddButton from '%c/components/TaskAddButton.svelte';
   import TaskCard from '%c/components/TaskCard.svelte';
@@ -7,9 +8,9 @@
   import type { TaskPopUpInput } from '%c/components/TaskPopUp.type';
   import { currentUser } from '%c/store/current-user';
   import type { TMod } from '%d/model';
+  import { CreateTask, DeleteTask, GetTasks, UpdateTask } from '%d/procedures';
   import { sampleTasks } from '%d/samples';
   import { replaceOne } from '%u/replace-one';
-  import { sleep } from '%u/sleep';
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
 
@@ -30,9 +31,10 @@
   let editingId: string | null = null;
   let addingStatus: TMod.Task['status'] | null = null;
   let draggingId: string | null = null;
+  let isDeleting: boolean = false;
 
   onMount(async () => {
-    await sleep(500);
+    tasks = await callApi(GetTasks, {});
     isLoading = false;
   });
 
@@ -63,21 +65,27 @@
   };
   const createTask = async (values: TaskPopUpInput) => {
     if (addingStatus == null) return;
-    const newTask: TMod.Task = {
-      id: Math.random().toString(36).slice(2),
-      userId: data.currentUser!.id,
-      status: addingStatus,
-      ...values,
-    };
+    const newTask = await callApi(CreateTask, {
+      data: {
+        title: values.title,
+        description: values.description,
+        status: addingStatus,
+      },
+    });
     tasks = [...tasks, newTask];
-    await sleep(300);
     addingStatus = null;
   };
   const updateTask = async (values: TaskPopUpInput) => {
     if (editingTask == null) return;
-    const newTask: TMod.Task = { ...editingTask, ...values };
+    const newTask = await callApi(UpdateTask, {
+      id: editingTask.id,
+      data: {
+        title: values.title,
+        description: values.description,
+        status: editingTask.status,
+      },
+    });
     tasks = replaceOne(tasks, 'id', newTask);
-    await sleep(300);
     editingId = null;
   };
   const updateTaskStatus = (status: TMod.Task['status']) => {
@@ -85,6 +93,14 @@
     if (draggingTask == null) return;
     const newTask: TMod.Task = { ...draggingTask, status };
     tasks = replaceOne(tasks, 'id', newTask);
+  };
+  const deleteTask = async () => {
+    if (editingTask == null) return;
+    isDeleting = true;
+    await callApi(DeleteTask, { id: editingTask.id });
+    tasks = tasks.filter((task) => task.id !== editingTask!.id);
+    editingId = null;
+    isDeleting = false;
   };
 </script>
 
@@ -124,5 +140,5 @@
 
 {#if editingTask != null}
   <PopUpMask on:click={() => (editingId = null)} />
-  <TaskPopUp task={editingTask} onSubmit={updateTask} />
+  <TaskPopUp task={editingTask} {isDeleting} onSubmit={updateTask} onDelete={deleteTask} />
 {/if}

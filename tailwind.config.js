@@ -45,7 +45,7 @@ module.exports = {
   theme: {
     colors: {
       transparent: 'transparent',
-      ...createColorMap(['border', 'background', 'foreground', 'primary', 'secondary', 'muted', 'strong', 'accent']),
+      ...createColorMap(['background', 'foreground', 'primary', 'secondary', 'muted', 'strong', 'border', 'outline', 'accent']),
     },
     spacing: { ...remsMap, ...nonNumericals },
     fontSize: remsMap,

@@ -43,6 +43,18 @@ export const GetCurrentUser = {
   },
 } satisfies Procedure;
 
+export const GetTasks = {
+  method: 'get',
+  path: '/tasks',
+  request: {
+    cookies: z.object({ authToken: z.string() }),
+  },
+  response: {
+    successCode: 200,
+    body: z.array(mod_Task),
+  },
+} satisfies Procedure;
+
 export const CreateTask = {
   method: 'post',
   path: '/tasks',

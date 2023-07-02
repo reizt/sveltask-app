@@ -33,7 +33,7 @@ export const makeApiRequest = <O extends Procedure>(procedure: O, input: InferCl
   return {
     method: procedure.method,
     path: makeRealPath(procedure.path, params),
-    body,
+    body: JSON.stringify(body) === '{}' ? null : body,
     query,
     cookies: {},
     params,

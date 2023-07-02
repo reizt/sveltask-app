@@ -11,7 +11,7 @@ export type _Repository = {
 export type IdWhere = { id: string };
 export type Where = { id?: string; userId?: string };
 
-export type FindMany = { where: {} };
+export type FindMany = { where: { userId: string } };
 export type FindFirst = { where: Where };
 export type Create = { data: TMod.Task };
 export type Update = { where: IdWhere; data: Partial<TMod.Task> };
