@@ -1,6 +1,6 @@
 import * as defs from '%d/procedures';
 import type { RequestHandler } from '@sveltejs/kit';
-import { initApp } from './init-app';
+import { initApp } from '../plugins/init-app';
 import { makeResponse } from './make-response';
 import { parseEvent } from './parse-event';
 import { parseOutput } from './parse-output';

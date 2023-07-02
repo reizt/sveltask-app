@@ -13,16 +13,18 @@ import type { Context } from './context';
 
 type ProcedureId = keyof typeof defs;
 
-type InOf<O extends ProcedureId> = InferBackendIn<(typeof defs)[O]>;
-type OutOf<O extends ProcedureId> = InferBackendOut<(typeof defs)[O]>;
+type In<O extends ProcedureId> = InferBackendIn<(typeof defs)[O]>;
+type Out<O extends ProcedureId> = InferBackendOut<(typeof defs)[O]>;
 
-type Before<O extends ProcedureId> = (input: InOf<O>, ctx: Context) => Promise<OutOf<O>>;
-type After<O extends ProcedureId> = (input: InOf<O>) => Promise<OutOf<O>>;
-const inject = <O extends ProcedureId>(handler: Before<O>, ctx: Context): After<O> => {
+type WithContext<O extends ProcedureId> = (input: In<O>, ctx: Context) => Promise<Out<O>>;
+type WithoutContext<O extends ProcedureId> = (input: In<O>) => Promise<Out<O>>;
+
+type Inject = <O extends ProcedureId>(handler: WithContext<O>, ctx: Context) => WithoutContext<O>;
+const inject: Inject = (handler, ctx) => {
   return async (input) => await handler(input, ctx);
 };
 
-type App = { [O in keyof typeof defs]: (input: InOf<O>) => Promise<OutOf<O>> };
+type App = { [O in keyof typeof defs]: (input: In<O>) => Promise<Out<O>> };
 
 export const createApp = (ctx: Context): App => {
   return {

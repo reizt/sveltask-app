@@ -3,8 +3,6 @@ import type { TMod } from '%d/model';
 import { newId } from '../funcs/identify';
 
 export const VerifyLogin: Fun<'VerifyLogin'> = async (input, ctx) => {
-  console.log('VerifyLogin', input);
-
   const session = await ctx.serializer.deserialize(input.authToken);
   if (session.type !== 'verify' || session.code !== input.code) {
     throw new Error('invalid code');

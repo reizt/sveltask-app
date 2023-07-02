@@ -3,7 +3,6 @@ import { authorizeLogin } from '../funcs/authorize-login';
 import { newId } from '../funcs/identify';
 
 export const CreateTask: Fun<'CreateTask'> = async (input, ctx) => {
-  console.log('CreateTask', input);
   const currentUser = await authorizeLogin({ authToken: input.authToken }, ctx);
 
   const task = await ctx.db.tasks.create({

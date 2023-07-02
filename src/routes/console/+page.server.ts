@@ -1,4 +1,4 @@
-import { initApp } from '%b/server/init-app';
+import { initApp } from '%b/plugins/init-app';
 import type { TMod } from '%d/model';
 import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
 
