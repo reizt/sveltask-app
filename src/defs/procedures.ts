@@ -102,11 +102,13 @@ export const UpdateTask = {
   request: {
     cookies: z.object({ authToken: z.string() }),
     params: z.object({ id: z.string() }),
-    body: z.object({
-      title: mod_Task.shape.title,
-      description: mod_Task.shape.description,
-      status: mod_Task.shape.status,
-    }),
+    body: z
+      .object({
+        title: mod_Task.shape.title,
+        description: mod_Task.shape.description,
+        status: mod_Task.shape.status,
+      })
+      .partial(),
   },
   response: {
     successCode: 200,
@@ -119,9 +121,11 @@ export const UpdateCurrentUser = {
   path: '/current-user',
   request: {
     cookies: z.object({ authToken: z.string() }),
-    body: z.object({
-      name: mod_User.shape.name,
-    }),
+    body: z
+      .object({
+        name: mod_User.shape.name,
+      })
+      .partial(),
   },
   response: {
     successCode: 200,

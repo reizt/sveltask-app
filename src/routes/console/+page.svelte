@@ -84,9 +84,10 @@
     tasks = replaceOne(tasks, 'id', newTask);
     editingId = null;
   };
-  const updateTaskStatus = (status: TMod.Task['status']) => {
+  const updateTaskStatus = async (status: TMod.Task['status']) => {
     const draggingTask = tasks.find((task) => task.id === draggingId);
     if (draggingTask == null) return;
+    await callApi(UpdateTask, { id: draggingTask.id, status });
     const newTask: TMod.Task = { ...draggingTask, status };
     tasks = replaceOne(tasks, 'id', newTask);
   };
