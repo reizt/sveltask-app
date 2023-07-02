@@ -31,6 +31,18 @@ export const VerifyLogin = {
   },
 } satisfies Procedure;
 
+export const LogOut = {
+  method: 'delete',
+  path: '/logout',
+  request: {
+    cookies: z.object({ authToken: z.string() }),
+  },
+  response: {
+    successCode: 204,
+    cookies: z.object({ authToken: z.string() }),
+  },
+} satisfies Procedure;
+
 export const GetCurrentUser = {
   method: 'get',
   path: '/current-user',

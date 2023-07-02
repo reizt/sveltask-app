@@ -13,7 +13,7 @@ export class SendgridMailer implements IMailer {
       from: env.MAILER_FROM,
       subject: '[TODO APP] Enter Verification Code',
       text: `Enter this code: ${values.code}`,
-      html: `<strong>Enter this code: ${values.code}</strong>`,
+      html: `Enter this code: ${values.code}`,
     };
     await sendgrid.send(msg);
   }
