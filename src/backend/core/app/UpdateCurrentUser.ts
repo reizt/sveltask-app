@@ -8,7 +8,7 @@ export const UpdateCurrentUser: Fun<'UpdateCurrentUser'> = async (input, ctx) =>
   const updatedUser = await ctx.db.users.update({
     where: { id: currentUser.id },
     data: {
-      name: input.data.name,
+      name: input.name,
     },
   });
 

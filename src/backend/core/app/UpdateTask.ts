@@ -15,9 +15,9 @@ export const UpdateTask: Fun<'UpdateTask'> = async (input, ctx) => {
   const updatedTask = await ctx.db.tasks.update({
     where: { id: task.id },
     data: {
-      title: input.data.title,
-      description: input.data.description,
-      status: input.data.status,
+      title: input.title,
+      description: input.description,
+      status: input.status,
     },
   });
   return updatedTask;

@@ -66,11 +66,9 @@
   const createTask = async (values: TaskPopUpInput) => {
     if (addingStatus == null) return;
     const newTask = await callApi(CreateTask, {
-      data: {
-        title: values.title,
-        description: values.description,
-        status: addingStatus,
-      },
+      title: values.title,
+      description: values.description,
+      status: addingStatus,
     });
     tasks = [...tasks, newTask];
     addingStatus = null;
@@ -79,11 +77,9 @@
     if (editingTask == null) return;
     const newTask = await callApi(UpdateTask, {
       id: editingTask.id,
-      data: {
-        title: values.title,
-        description: values.description,
-        status: editingTask.status,
-      },
+      title: values.title,
+      description: values.description,
+      status: editingTask.status,
     });
     tasks = replaceOne(tasks, 'id', newTask);
     editingId = null;

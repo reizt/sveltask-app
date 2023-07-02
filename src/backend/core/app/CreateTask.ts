@@ -10,9 +10,9 @@ export const CreateTask: Fun<'CreateTask'> = async (input, ctx) => {
     data: {
       id: newId(),
       userId: currentUser.id,
-      title: input.data.title,
-      description: input.data.description,
-      status: input.data.status,
+      title: input.title,
+      description: input.description,
+      status: input.status,
     },
   });
 

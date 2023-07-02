@@ -73,11 +73,9 @@ export const CreateTask = {
   request: {
     cookies: z.object({ authToken: z.string() }),
     body: z.object({
-      data: z.object({
-        title: mod_Task.shape.title,
-        description: mod_Task.shape.description,
-        status: mod_Task.shape.status,
-      }),
+      title: mod_Task.shape.title,
+      description: mod_Task.shape.description,
+      status: mod_Task.shape.status,
     }),
   },
   response: {
@@ -105,11 +103,9 @@ export const UpdateTask = {
     cookies: z.object({ authToken: z.string() }),
     params: z.object({ id: z.string() }),
     body: z.object({
-      data: z.object({
-        title: mod_Task.shape.title,
-        description: mod_Task.shape.description,
-        status: mod_Task.shape.status,
-      }),
+      title: mod_Task.shape.title,
+      description: mod_Task.shape.description,
+      status: mod_Task.shape.status,
     }),
   },
   response: {
@@ -124,9 +120,7 @@ export const UpdateCurrentUser = {
   request: {
     cookies: z.object({ authToken: z.string() }),
     body: z.object({
-      data: z.object({
-        name: mod_User.shape.name,
-      }),
+      name: mod_User.shape.name,
     }),
   },
   response: {

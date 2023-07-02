@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { callApi } from '%c/api';
   import { currentUser } from '%c/store/current-user';
   import type { InferBody } from '%d/procedure';
   import { UpdateCurrentUser } from '%d/procedures';
@@ -9,16 +10,21 @@
   export let data: PageData;
   currentUser.set(data.currentUser);
 
+  let isSubmitting: boolean = false;
+
   type Input = InferBody<typeof UpdateCurrentUser>;
 
   const onSubmit = async (values: Input) => {
-    currentUser.update((user) => {
-      if (user == null) return null;
-      return { ...user, ...values };
+    isSubmitting = true;
+    const newUser = await callApi(UpdateCurrentUser, {
+      name: values.name,
     });
+    currentUser.update(() => newUser);
+    isSubmitting = false;
+    setIsDirty(false);
   };
 
-  const { form } = createForm<Input>({
+  const { form, isValid, isDirty, setIsDirty } = createForm<Input>({
     extend: validator({ schema: UpdateCurrentUser.request.body }),
     onSubmit,
   });
@@ -42,8 +48,13 @@
   </div>
   <button
     type="submit"
-    class="h-40 w-100 rounded-4 bg-primary text-14 text-secondary outline-2 outline-offset-1 outline-outline hover:bg-primary/80 focus:outline active:outline"
+    disabled={!$isDirty || !$isValid || isSubmitting}
+    class="h-40 w-100 rounded-4 bg-primary text-14 text-secondary outline-2 outline-offset-1 outline-outline hover:bg-primary/80 focus:outline active:outline disabled:bg-primary/80"
   >
-    Save
+    {#if isSubmitting}
+      Saving...
+    {:else}
+      Save
+    {/if}
   </button>
 </form>
