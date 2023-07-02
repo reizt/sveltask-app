@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { callApi } from '%c/api';
+  import { callApi } from '%c/api/client-side';
   import AppSymbol from '%c/components/AppSymbol.svelte';
   import RegisterButton from '%c/components/RegisterButton.svelte';
   import type { InferBody } from '%d/procedure';

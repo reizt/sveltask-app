@@ -1,5 +1,6 @@
-import { initApp } from '%b/plugins/init-app';
+import { serverSideCallApi } from '%c/api/server-side';
 import type { TMod } from '%d/model';
+import { GetCurrentUser } from '%d/procedures';
 import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
 
 type Props = {
@@ -8,14 +9,11 @@ type Props = {
 
 export const load = async (event: ServerLoadEvent): Promise<Props> => {
   try {
-    const app = await initApp();
-    const currentUser = await app.GetCurrentUser({ authToken: event.cookies.get('authToken') ?? '' });
-
+    const currentUser = await serverSideCallApi(GetCurrentUser, {}, event.request.headers.get('cookie')!);
     return {
       currentUser,
     };
   } catch (err) {
-    console.log(err);
     // eslint-disable-next-line @typescript-eslint/no-throw-literal
     throw redirect(302, '/login');
   }

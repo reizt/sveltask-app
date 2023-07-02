@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { callApi } from '%c/api';
+  import { callApi } from '%c/api/client-side';
   import PopUpMask from '%c/components/PopUpMask.svelte';
   import TaskAddButton from '%c/components/TaskAddButton.svelte';
   import TaskCard from '%c/components/TaskCard.svelte';

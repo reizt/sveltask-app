@@ -10,14 +10,12 @@
     "tests/**/*.js",
     "tests/**/*.ts",
     "tests/**/*.svelte",
-    "env.d.ts",
-    "drizzle.config.ts"
+    "env.d.ts"
   ],
   "exclude": ["node_modules/**", ".svelte-kit/[!ambient.d.ts]**", "src/service-worker.js", "src/service-worker.ts", "src/service-worker.d.ts"],
   "compilerOptions": {
     "paths": {
       "%c/*": ["./src/client/*"],
-      "%b/*": ["./src/backend/*"],
       "%d/*": ["./src/defs/*"],
       "%u/*": ["./src/utils/*"]
     },

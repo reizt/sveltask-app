@@ -14,7 +14,6 @@ const config = {
     adapter: adapter(),
     alias: {
       '%c/*': './src/client',
-      '%b/*': './src/backend',
       '%d/*': './src/defs',
       '%u/*': './src/utils',
     },

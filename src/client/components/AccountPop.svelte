@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { callApi } from '%c/api';
+  import { callApi } from '%c/api/client-side';
   import { LogOut } from '%d/procedures';
 
   let showDropdown: boolean = false;
