@@ -9,9 +9,6 @@ import postgres from 'postgres';
 export const initApp = async () => {
   const postgresClient = postgres(env.DATABASE_URL);
   const client = drizzle(postgresClient);
-  // await migrate(client, {
-  //   migrationsFolder: 'src/backend/plugins/drizzle/out',
-  // });
   const db = createDatabasePlugin(client);
   const serializer = new JwtSerializer(env.JWT_PRIVATE_KEY, env.JWT_PUBLIC_KEY);
   const mailer = new SendgridMailer();

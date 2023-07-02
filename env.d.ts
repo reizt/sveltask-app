@@ -6,6 +6,8 @@ interface ImportMetaEnv {
   readonly JWT_PUBLIC_KEY: string;
   readonly SENDGRID_API_KEY: string;
   readonly MAILER_FROM: string;
+  readonly PRIVATE_API_KEY: string;
+  readonly DRIZZLE_OUTDIR: string;
 }
 
 interface ImportMeta {

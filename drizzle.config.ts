@@ -1,10 +1,13 @@
-import { env } from '$env/dynamic/private';
+import dotenv from 'dotenv';
 import type { Config } from 'drizzle-kit';
+
+dotenv.config();
 
 export default {
   schema: './src/backend/plugins/drizzle/schema.ts',
-  out: './src/backend/plugins/drizzle/out',
+  out: process.env.DRIZZLE_OUTDIR!,
+  breakpoints: true,
   dbCredentials: {
-    connectionString: env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL!,
   },
 } satisfies Config;
