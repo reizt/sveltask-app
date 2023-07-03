@@ -1,6 +1,6 @@
-import { serverSideCallApi } from '%c/api/server-side';
-import type { TMod } from '%d/entity';
-import { GetCurrentUser } from '%d/procedures/GetCurrentUser';
+import { serverSideCallApi } from '#/api/server-side';
+import type { TMod } from '#/defs/entity';
+import { GetCurrentUser } from '#/defs/procedures/GetCurrentUser';
 import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
 
 type Props = {

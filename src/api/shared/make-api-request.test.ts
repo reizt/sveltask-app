@@ -1,4 +1,4 @@
-import type { Procedure } from '%d/lib/procedure';
+import type { Procedure } from '#/defs/lib/procedure';
 import { z } from 'zod';
 import { makeApiRequest } from './make-api-request';
 import type { InferClientIn } from './types';

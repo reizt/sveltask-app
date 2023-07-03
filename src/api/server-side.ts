@@ -1,6 +1,6 @@
+import type { ApiRequest, ApiResponse } from '#/defs/lib/api';
+import type { Procedure } from '#/defs/lib/procedure';
 import { API_ROOT } from '$env/static/private';
-import type { ApiRequest, ApiResponse } from '%d/lib/api';
-import type { Procedure } from '%d/lib/procedure';
 import axios, { AxiosError } from 'axios';
 import { decodeApiResponse } from './shared/decode-api-response';
 import { makeApiRequest } from './shared/make-api-request';
@@ -22,7 +22,7 @@ const execApiRequest = async (req: ApiRequest, cookie: string): Promise<ApiRespo
       url: path,
       data: req.body,
       params: req.query,
-      headers: { 'Content-Type': 'application/json', cookie },
+      headers: { 'Content-Type': req.body != null ? 'application/json' : undefined, cookie },
     });
     return {
       status: res.status,
@@ -31,7 +31,11 @@ const execApiRequest = async (req: ApiRequest, cookie: string): Promise<ApiRespo
     };
   } catch (err) {
     if (err instanceof AxiosError) {
-      console.error(JSON.stringify(err.response?.data ?? err.response ?? err.message, null, 2));
+      try {
+        console.error(JSON.stringify(err.response?.data ?? err.response ?? err.message, null, 2));
+      } catch {
+        console.error(err);
+      }
     } else {
       console.error(err);
     }

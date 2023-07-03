@@ -13,9 +13,7 @@ const config = {
     // See https://kit.svelte.dev/docs/adapters for more information about adapters.
     adapter: adapter(),
     alias: {
-      '%c/*': './src/client',
-      '%d/*': './src/defs',
-      '%u/*': './src/utils',
+      '#/*': './src',
     },
   },
 };

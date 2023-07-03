@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { callApi } from '%c/api/client-side';
-  import PopUpMask from '%c/components/PopUpMask.svelte';
-  import TaskAddButton from '%c/components/TaskAddButton.svelte';
-  import TaskCard from '%c/components/TaskCard.svelte';
-  import TaskCardSkeleton from '%c/components/TaskCardSkeleton.svelte';
-  import TaskPopUp from '%c/components/TaskPopUp.svelte';
-  import type { TaskPopUpInput } from '%c/components/TaskPopUp.type';
-  import { currentUser } from '%c/store/current-user';
-  import type { TMod } from '%d/entity';
-  import { CreateTask } from '%d/procedures/CreateTask';
-  import { DeleteTask } from '%d/procedures/DeleteTask';
-  import { GetTasks } from '%d/procedures/GetTasks';
-  import { UpdateTask } from '%d/procedures/UpdateTask';
-  import { replaceOne } from '%u/replace-one';
+  import { callApi } from '#/api/client-side';
+  import PopUpMask from '#/components/PopUpMask.svelte';
+  import TaskAddButton from '#/components/TaskAddButton.svelte';
+  import TaskCard from '#/components/TaskCard.svelte';
+  import TaskCardSkeleton from '#/components/TaskCardSkeleton.svelte';
+  import TaskPopUp from '#/components/TaskPopUp.svelte';
+  import type { TaskPopUpInput } from '#/components/TaskPopUp.type';
+  import type { TMod } from '#/defs/entity';
+  import { CreateTask } from '#/defs/procedures/CreateTask';
+  import { DeleteTask } from '#/defs/procedures/DeleteTask';
+  import { GetTasks } from '#/defs/procedures/GetTasks';
+  import { UpdateTask } from '#/defs/procedures/UpdateTask';
+  import { currentUser } from '#/store/current-user';
+  import { replaceOne } from '#/utils/replace-one';
   import { onMount } from 'svelte';
   import type { PageData } from './$types';
 

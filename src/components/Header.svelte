@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TMod } from '%d/entity';
+  import type { TMod } from '#/defs/entity';
   import AccountPop from './AccountPop.svelte';
   import AppSymbol from './AppSymbol.svelte';
   import ThemeSwitch from './ThemeSwitch.svelte';

@@ -1,10 +1,10 @@
 <script lang="ts">
+  import { callApi } from '#/api/client-side';
+  import AppSymbol from '#/components/AppSymbol.svelte';
+  import RegisterButton from '#/components/RegisterButton.svelte';
+  import type { InferBody } from '#/defs/lib/procedure';
+  import { AttemptLogin } from '#/defs/procedures/AttemptLogin';
   import { goto } from '$app/navigation';
-  import { callApi } from '%c/api/client-side';
-  import AppSymbol from '%c/components/AppSymbol.svelte';
-  import RegisterButton from '%c/components/RegisterButton.svelte';
-  import type { InferBody } from '%d/lib/procedure';
-  import { AttemptLogin } from '%d/procedures/AttemptLogin';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
 
@@ -16,13 +16,12 @@
     isSubmitting = true;
     try {
       await callApi(AttemptLogin, values);
+      await goto('/login/verify');
     } catch (err) {
       console.log(err);
-      return;
     } finally {
       isSubmitting = false;
     }
-    await goto('/login/verify');
   };
 
   const { form, isValid } = createForm<Input>({

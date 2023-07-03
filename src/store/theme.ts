@@ -1,4 +1,4 @@
-import { prefersDark } from '%u/prefers-dark';
+import { prefersDark } from '#/utils/prefers-dark';
 
 export type Theme = 'light' | 'dark';
 export const getTheme = (): Theme => {
