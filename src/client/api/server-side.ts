@@ -1,6 +1,6 @@
 import { API_ROOT } from '$env/static/private';
-import type { ApiRequest, ApiResponse } from '%d/api';
-import type { Procedure } from '%d/procedure';
+import type { ApiRequest, ApiResponse } from '%d/lib/api';
+import type { Procedure } from '%d/lib/procedure';
 import axios, { AxiosError } from 'axios';
 import { decodeApiResponse } from './shared/decode-api-response';
 import { makeApiRequest } from './shared/make-api-request';

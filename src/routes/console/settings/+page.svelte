@@ -1,8 +1,8 @@
 <script lang="ts">
   import { callApi } from '%c/api/client-side';
   import { currentUser } from '%c/store/current-user';
-  import type { InferBody } from '%d/procedure';
-  import { UpdateCurrentUser } from '%d/procedures';
+  import type { InferBody } from '%d/lib/procedure';
+  import { UpdateCurrentUser } from '%d/procedures/UpdateCurrentUser';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
   import type { PageData } from './$types';

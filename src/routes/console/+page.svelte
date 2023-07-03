@@ -7,8 +7,11 @@
   import TaskPopUp from '%c/components/TaskPopUp.svelte';
   import type { TaskPopUpInput } from '%c/components/TaskPopUp.type';
   import { currentUser } from '%c/store/current-user';
-  import type { TMod } from '%d/model';
-  import { CreateTask, DeleteTask, GetTasks, UpdateTask } from '%d/procedures';
+  import type { TMod } from '%d/entity';
+  import { CreateTask } from '%d/procedures/CreateTask';
+  import { DeleteTask } from '%d/procedures/DeleteTask';
+  import { GetTasks } from '%d/procedures/GetTasks';
+  import { UpdateTask } from '%d/procedures/UpdateTask';
   import { replaceOne } from '%u/replace-one';
   import { onMount } from 'svelte';
   import type { PageData } from './$types';

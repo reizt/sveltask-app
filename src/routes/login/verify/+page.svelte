@@ -3,8 +3,8 @@
   import { callApi } from '%c/api/client-side';
   import AppSymbol from '%c/components/AppSymbol.svelte';
   import RegisterButton from '%c/components/RegisterButton.svelte';
-  import type { InferBody } from '%d/procedure';
-  import { VerifyLogin } from '%d/procedures';
+  import type { InferBody } from '%d/lib/procedure';
+  import { VerifyLogin } from '%d/procedures/VerifyLogin';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
 

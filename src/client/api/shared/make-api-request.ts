@@ -1,5 +1,5 @@
-import type { ApiRequest } from '%d/api';
-import type { Procedure } from '%d/procedure';
+import type { ApiRequest } from '%d/lib/api';
+import type { Procedure } from '%d/lib/procedure';
 import { makeRealPath } from './make-real-path';
 import type { InferClientIn } from './types';
 

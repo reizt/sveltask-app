@@ -1,6 +1,6 @@
 import { PUBLIC_API_ROOT } from '$env/static/public';
-import type { ApiRequest, ApiResponse } from '%d/api';
-import type { Procedure } from '%d/procedure';
+import type { ApiRequest, ApiResponse } from '%d/lib/api';
+import type { Procedure } from '%d/lib/procedure';
 import { decodeApiResponse } from './shared/decode-api-response';
 import { makeApiRequest } from './shared/make-api-request';
 import { makeRealPath } from './shared/make-real-path';

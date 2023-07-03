@@ -1,5 +1,5 @@
-import type { ApiResponse } from '%d/api';
-import type { Procedure } from '%d/procedure';
+import type { ApiResponse } from '%d/lib/api';
+import type { Procedure } from '%d/lib/procedure';
 import type { z } from 'zod';
 import type { InferClientOut } from './types';
 

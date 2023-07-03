@@ -1,4 +1,4 @@
-import type { Procedure } from '%d/procedure';
+import type { Procedure } from '%d/lib/procedure';
 import type { z } from 'zod';
 
 type OptionalInfer<T, F> = T extends z.ZodTypeAny ? z.infer<T> : F;

@@ -15,6 +15,7 @@
     "lint": "run-s lint:prettier lint:eslint check",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check src",
+    "lint:tsc": "tsc --noEmit",
     "format": "run-s format:prettier format:eslint",
     "format:eslint": "eslint . --fix",
     "format:prettier": "prettier --write --loglevel silent src"
