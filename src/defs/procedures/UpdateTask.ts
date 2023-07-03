@@ -1,13 +1,14 @@
 import { z } from 'zod';
 import { ent_Task } from '../entity/schema';
 import type { Procedure } from '../lib/procedure';
+import { zc } from '../lib/zod';
 
 export const UpdateTask = {
   method: 'patch',
   path: '/tasks/{id}',
   request: {
-    cookies: z.object({ authToken: z.string() }),
-    params: z.object({ id: z.string() }),
+    cookies: z.object({ authToken: zc.string() }),
+    params: z.object({ id: zc.string() }),
     body: z
       .object({
         title: ent_Task.shape.title,

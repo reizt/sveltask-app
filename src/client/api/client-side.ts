@@ -27,6 +27,11 @@ const execApiRequest = async (req: ApiRequest): Promise<ApiResponse> => {
   try {
     json = await res.json();
   } catch {}
+
+  if (res.status >= 400) {
+    console.log(json);
+    throw new Error(`API error: ${res.status} ${res.statusText} ${JSON.stringify(json)}`);
+  }
   return {
     status: res.status,
     body: json,

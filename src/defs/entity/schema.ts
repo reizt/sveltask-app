@@ -1,16 +1,17 @@
 import { z } from 'zod';
+import { zc } from '../lib/zod';
 
-const val_id = z.string().regex(/^[a-zA-Z0-9_-]{8}$/);
-const val_createdAt = z.coerce.date();
-const val_updatedAt = z.coerce.date();
+const val_id = zc.string().regex(/^[a-zA-Z0-9_-]{8}$/);
+const val_createdAt = zc.date();
+const val_updatedAt = zc.date();
 
 export const ent_Task = z.object({
   id: val_id,
   createdAt: val_createdAt,
   updatedAt: val_updatedAt,
-  userId: z.string(),
-  title: z.string(),
-  description: z.string().nullable(),
+  userId: zc.string(),
+  title: zc.string(),
+  description: zc.string().nullable(),
   status: z.enum(['created', 'progress', 'completed']),
 });
 
@@ -18,6 +19,6 @@ export const ent_User = z.object({
   id: val_id,
   createdAt: val_createdAt,
   updatedAt: val_updatedAt,
-  name: z.string(),
-  email: z.string().email(),
+  name: zc.string(),
+  email: zc.string().email(),
 });

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { ent_User } from '../entity/schema';
 import type { Procedure } from '../lib/procedure';
+import { zc } from '../lib/zod';
 
 export const AttemptLogin = {
   method: 'post',
@@ -12,6 +13,6 @@ export const AttemptLogin = {
   },
   response: {
     successCode: 204,
-    cookies: z.object({ authToken: z.string() }),
+    cookies: z.object({ authToken: zc.string() }),
   },
 } satisfies Procedure;
