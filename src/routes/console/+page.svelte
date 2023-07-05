@@ -11,21 +11,26 @@
   import { DeleteTask } from '#/defs/procedures/DeleteTask';
   import { GetTasks } from '#/defs/procedures/GetTasks';
   import { UpdateTask } from '#/defs/procedures/UpdateTask';
+  import { createTranslator } from '#/i18n/translator';
   import { currentUser } from '#/store/current-user';
+  import { i18n } from '#/store/i18n';
   import { replaceOne } from '#/utils/replace-one';
   import { onMount } from 'svelte';
+  import { derived } from 'svelte/store';
   import type { PageData } from './$types';
+
+  const t = derived(i18n, (v) => createTranslator(v.lang));
 
   export let data: PageData;
   currentUser.set(data.currentUser);
 
   // Constants
-  const statuses: TMod.Task['status'][] = ['created', 'progress', 'completed'];
-  const statusLabels: Record<TMod.Task['status'], string> = {
-    created: 'Created',
-    progress: 'In Progress',
-    completed: 'Completed',
-  };
+  $: statuses = ['created', 'progress', 'completed'] satisfies TMod.Task['status'][];
+  $: statusLabels = {
+    created: $t('enum.task_status.created'),
+    progress: $t('enum.task_status.progress'),
+    completed: $t('enum.task_status.completed'),
+  } satisfies Record<TMod.Task['status'], string>;
 
   // States
   let tasks: TMod.Task[] = [];
@@ -104,11 +109,11 @@
 </script>
 
 <svelte:head>
-  <title>Board | TODO APP</title>
+  <title>{$t('pages.board.title')} | TODO APP</title>
 </svelte:head>
 
 <div class="mb-20 flex justify-between">
-  <h1 class="text-32 font-bold">Board</h1>
+  <h1 class="text-32 font-bold">{$t('pages.board.title')}</h1>
   <TaskAddButton on:click={() => openAdd('created')} />
 </div>
 <div class="flex gap-x-24">

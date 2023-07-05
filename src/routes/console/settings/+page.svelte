@@ -2,10 +2,15 @@
   import { callApi } from '#/api/client-side';
   import type { InferBody } from '#/defs/lib/procedure';
   import { UpdateCurrentUser } from '#/defs/procedures/UpdateCurrentUser';
+  import { createTranslator } from '#/i18n/translator';
   import { currentUser } from '#/store/current-user';
+  import { i18n } from '#/store/i18n';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
+  import { derived } from 'svelte/store';
   import type { PageData } from './$types';
+
+  const t = derived(i18n, (v) => createTranslator(v.lang));
 
   export let data: PageData;
   currentUser.set(data.currentUser);
@@ -31,14 +36,14 @@
 </script>
 
 <svelte:head>
-  <title>Settings | TODO APP</title>
+  <title>{$t('pages.settings.title')} | TODO APP</title>
 </svelte:head>
 
-<h1 class="text-32 font-bold">Settings</h1>
+<h1 class="text-32 font-bold">{$t('pages.settings.title')}</h1>
 
 <form use:form>
   <div class="mb-16">
-    <h2 class="mb-6 text-18 font-medium">Your Name</h2>
+    <h2 class="mb-6 text-18 font-medium">{$t('pages.settings.your_name')}</h2>
     <input
       type="text"
       name="name"
@@ -52,9 +57,9 @@
     class="h-40 w-100 rounded-4 bg-primary text-14 text-secondary outline-2 outline-offset-1 outline-outline hover:bg-primary/80 focus:outline active:outline disabled:bg-primary/80"
   >
     {#if isSubmitting}
-      Saving...
+      {$t('global.saving')}
     {:else}
-      Save
+      {$t('global.save')}
     {/if}
   </button>
 </form>

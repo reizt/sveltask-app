@@ -4,9 +4,14 @@
   import RegisterButton from '#/components/RegisterButton.svelte';
   import type { InferBody } from '#/defs/lib/procedure';
   import { VerifyLogin } from '#/defs/procedures/VerifyLogin';
+  import { createTranslator } from '#/i18n/translator';
+  import { i18n } from '#/store/i18n';
   import { goto } from '$app/navigation';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
+  import { derived } from 'svelte/store';
+
+  const t = derived(i18n, (v) => createTranslator(v.lang));
 
   type Input = InferBody<typeof VerifyLogin>;
 
@@ -31,7 +36,7 @@
 </script>
 
 <svelte:head>
-  <title>Log In | TODO APP</title>
+  <title>{$t('pages.verify.title')} | TODO APP</title>
 </svelte:head>
 
 <div class="flex h-screen-y items-center justify-center">
@@ -40,15 +45,15 @@
       <a href="/" class="mb-30 flex justify-center">
         <AppSymbol />
       </a>
-      <h1 class="mb-16 text-center text-28 font-bold">Enter Code</h1>
+      <h1 class="mb-16 text-center text-28 font-bold">{$t('pages.verify.enter_code')}</h1>
       <input
         type="text"
         autocomplete="one-time-code"
         name="code"
-        placeholder="6 digit code"
+        placeholder={$t('pages.verify.six_digit_code')}
         class="mb-10 h-40 w-full rounded-4 border-1 border-border bg-background px-12 text-14 outline-2 outline-offset-1 outline-outline focus:outline"
       />
-      <RegisterButton disabled={!$isValid || isSubmitting} loading={isSubmitting}>Verify</RegisterButton>
+      <RegisterButton disabled={!$isValid || isSubmitting} loading={isSubmitting}>{$t('pages.verify.verify')}</RegisterButton>
     </form>
   </div>
 </div>

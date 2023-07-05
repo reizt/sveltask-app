@@ -2,6 +2,7 @@
   import type { TMod } from '#/defs/entity';
   import AccountPop from './AccountPop.svelte';
   import AppSymbol from './AppSymbol.svelte';
+  import LangSwitch from './LangSwitch.svelte';
   import ThemeSwitch from './ThemeSwitch.svelte';
 
   export let currentUser: TMod.User | null = null;
@@ -12,6 +13,7 @@
     <AppSymbol />
   </a>
   <div class="grow" />
+  <LangSwitch />
   <ThemeSwitch />
   {#if currentUser != null}
     <AccountPop />
