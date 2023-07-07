@@ -1,8 +1,11 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly API_ROOT: string;
-  readonly PUBLIC_API_ROOT: string;
+  readonly JWT_PRIVATE_KEY: string;
+  readonly JWT_PUBLIC_KEY: string;
+  readonly SENDGRID_API_KEY: string;
+  readonly MAILER_FROM: string;
+  readonly DYNAMODB_TABLE_NAME: string;
 }
 
 interface ImportMeta {

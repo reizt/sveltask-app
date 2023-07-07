@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Header from '#/components/Header.svelte';
-  import Nav from '#/components/Nav.svelte';
-  import { currentUser } from '#/store/current-user';
+  import Header from '#/client/components/Header.svelte';
+  import Nav from '#/client/components/Nav.svelte';
+  import { currentUser } from '#/client/store/current-user';
 </script>
 
 <div class="flex min-h-screen flex-col">

@@ -1,6 +1,5 @@
-import { serverSideCallApi } from '#/api/server-side';
+import { app } from '#/backend/app';
 import type { TMod } from '#/defs/entity';
-import { GetCurrentUser } from '#/defs/procedures/GetCurrentUser';
 import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
 
 export const load = async (event: ServerLoadEvent): Promise<Props> => {
   try {
-    const currentUser = await serverSideCallApi(GetCurrentUser, {}, event.request.headers.get('cookie')!);
+    const currentUser = await app.GetCurrentUser({ authToken: event.cookies.get('authToken')! });
     return {
       currentUser,
     };
