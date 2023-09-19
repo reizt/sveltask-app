@@ -4,7 +4,7 @@ type Input = {
   authToken: string;
 };
 export const authorizeLogin = async (input: Input, ctx: Context) => {
-  const session = await ctx.serializer.deserialize(input.authToken);
+  const session = await ctx.signer.verify(input.authToken);
   if (session.type !== 'login') {
     throw new Error('invalid session type');
   }

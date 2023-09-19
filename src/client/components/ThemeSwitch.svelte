@@ -47,7 +47,7 @@
   {#if showDropdown}
     <div class="absolute right-0 top-50 mt-10 w-140 overflow-hidden rounded-6 border-1 border-border bg-background">
       {#each themes as theme}
-        <button on:click={() => switchTheme(theme.value)} class="flex h-32 w-full items-center gap-x-6 px-10 hover:bg-accent">
+        <button on:click={() => { switchTheme(theme.value); }} class="flex h-32 w-full items-center gap-x-6 px-10 hover:bg-accent">
           <span class="material-icons text-18">{theme.iconName}</span>
           <span class="text-12">{theme.label}</span>
         </button>

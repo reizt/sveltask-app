@@ -13,6 +13,9 @@ embeddedLanguageFormatting: auto
 endOfLine: lf
 htmlWhitespaceSensitivity: css
 insertPragma: false
+
 svelteSortOrder: options-styles-scripts-markup
 svelteStrictMode: false
 svelteIndentScriptAndStyle: true
+plugins:
+  - prettier-plugin-svelte

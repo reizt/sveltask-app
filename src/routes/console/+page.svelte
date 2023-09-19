@@ -114,12 +114,12 @@
 
 <div class="mb-20 flex justify-between">
   <h1 class="text-32 font-bold">{$t('pages.board.title')}</h1>
-  <TaskAddButton on:click={() => openAdd('created')} />
+  <TaskAddButton on:click={() => { openAdd('created'); }} />
 </div>
 <div class="flex gap-x-24">
   {#each statuses as status (status)}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div on:dragover|preventDefault on:drop|preventDefault={() => updateTaskStatus(status)} class="flex w-240 flex-col gap-y-12">
+    <div on:dragover|preventDefault on:drop|preventDefault={async () => { await updateTaskStatus(status); }} class="flex w-240 flex-col gap-y-12">
       <div class="flex items-center justify-between">
         <h2 class="text-16 text-muted">{statusLabels[status]}</h2>
       </div>

@@ -2,7 +2,7 @@ export type AppSession = Readonly<
   | {
       type: 'verify';
       email: string;
-      code: string;
+      codeHash: string;
     }
   | {
       type: 'login';

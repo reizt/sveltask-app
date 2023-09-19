@@ -1,11 +1,14 @@
 import type { AppSession } from '#/backend/context/app-session';
-import type { ISerializer } from '#/backend/context/serializer';
+import type { ISigner } from '#/backend/context/signer';
 import jwt from 'jsonwebtoken';
 
-export class JwtSerializer implements ISerializer {
-  constructor(private readonly privateKey: string, private readonly publicKey: string) {}
+export class JwtSigner implements ISigner {
+  constructor(
+    private readonly privateKey: string,
+    private readonly publicKey: string,
+  ) {}
 
-  async serialize(data: AppSession, options?: { expiresIn?: number }): Promise<string> {
+  async sign(data: AppSession, options?: { expiresIn?: number }): Promise<string> {
     const token = jwt.sign(data, this.privateKey, {
       algorithm: 'ES256',
       expiresIn: options?.expiresIn ?? '1d',
@@ -13,7 +16,7 @@ export class JwtSerializer implements ISerializer {
     return token;
   }
 
-  async deserialize(data: string): Promise<AppSession> {
+  async verify(data: string): Promise<AppSession> {
     try {
       const decoded = jwt.verify(data, this.publicKey, { algorithms: ['ES256'] });
       return decoded as AppSession;

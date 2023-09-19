@@ -6,7 +6,6 @@ import { parseEvent } from './parse-event';
 
 class SvelteKitCookiesImpl implements Cookies {
   constructor(private readonly cookies: Record<string, string>) {}
-
   get(name: string, opts?: CookieParseOptions | undefined): string | undefined {
     return this.cookies[name];
   }
@@ -28,8 +27,34 @@ class SvelteKitCookiesImpl implements Cookies {
     delete this.cookies[name];
   }
 
-  serialize(name: string, value: string, opts?: CookieSerializeOptions | undefined): string {
+  sign(name: string, value: string, opts?: CookieSerializeOptions | undefined): string {
     return `${name}=${value}`;
+  }
+
+  serialize(name: string, value: string, opts?: CookieSerializeOptions | undefined): string {
+    let cookie = `${name}=${value}`;
+    if (opts?.expires != null) {
+      cookie += `; Expires=${opts.expires.toUTCString()}`;
+    }
+    if (opts?.maxAge != null) {
+      cookie += `; Max-Age=${opts.maxAge}`;
+    }
+    if (opts?.domain != null) {
+      cookie += `; Domain=${opts.domain}`;
+    }
+    if (opts?.path != null) {
+      cookie += `; Path=${opts.path}`;
+    }
+    if (opts?.secure != null) {
+      cookie += `; Secure`;
+    }
+    if (opts?.httpOnly != null) {
+      cookie += `; HttpOnly`;
+    }
+    if (opts?.sameSite != null) {
+      cookie += `; SameSite=${opts.sameSite}`;
+    }
+    return cookie;
   }
 }
 
@@ -64,9 +89,10 @@ const event: RequestEvent = (() => {
     locals: {} as any,
     platform: '' as any,
     route: {} as any,
-    fetch: async () => ({} as any),
+    fetch: async () => ({}) as any,
     getClientAddress: () => '' as any,
-    setHeaders: () => ({} as any),
+    setHeaders: () => ({}) as any,
+    isSubRequest: false,
   };
 })();
 

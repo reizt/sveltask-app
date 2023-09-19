@@ -3,9 +3,14 @@ import type { CoreFun } from '#/backend/core/types';
 import type { TMod } from '#/defs/entity';
 
 export const VerifyLogin: CoreFun<'VerifyLogin'> = async (input, ctx) => {
-  const session = await ctx.serializer.deserialize(input.authToken);
-  console.log(session);
-  if (session.type !== 'verify' || session.code !== input.code) {
+  const session = await ctx.signer.verify(input.authToken);
+
+  if (session.type !== 'verify') {
+    throw new Error('invalid code');
+  }
+
+  const isCorrectCode = await ctx.hasher.compare(input.code, session.codeHash);
+  if (!isCorrectCode) {
     throw new Error('invalid code');
   }
 
@@ -24,6 +29,6 @@ export const VerifyLogin: CoreFun<'VerifyLogin'> = async (input, ctx) => {
   }
   console.log(user);
 
-  const authToken = await ctx.serializer.serialize({ type: 'login', userId: user.id });
+  const authToken = await ctx.signer.sign({ type: 'login', userId: user.id });
   return { authToken };
 };

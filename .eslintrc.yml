@@ -58,6 +58,7 @@ rules:
   '@typescript-eslint/ban-ts-comment': off
   '@typescript-eslint/naming-convention': off
   '@typescript-eslint/triple-slash-reference': off
+  '@typescript-eslint/confusing-void-expression': off
 
   # Tailwind
   tailwindcss/no-custom-classname:
