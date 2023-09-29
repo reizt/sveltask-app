@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TMod } from '#/defs/entity';
+  import type { TMod } from '#/def/entity';
 
   export let task: TMod.Task;
 </script>

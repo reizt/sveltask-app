@@ -2,7 +2,7 @@
   import { callApi } from '#/client/api';
   import { createTranslator } from '#/client/i18n/translator';
   import { i18n } from '#/client/store/i18n';
-  import { LogOut } from '#/defs/procedures/LogOut';
+  import { LogOut } from '#/def/endpoint/LogOut';
   import { goto } from '$app/navigation';
   import { derived } from 'svelte/store';
 

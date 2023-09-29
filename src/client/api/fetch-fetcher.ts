@@ -1,10 +1,10 @@
-import type { ApiRequest, ApiResponse } from '#/defs/lib/api';
+import type { ApiRequest, ApiResponse } from '#/def/lib/api';
 import { ApiError } from './error';
 import { makeRealPath } from './make-real-path';
 
 export const fetchFetcher = async (req: ApiRequest): Promise<ApiResponse> => {
   const path = makeRealPath(req.path, req.params);
-  const url = new URL(path, process.env.NEXT_PUBLIC_API_ROOT);
+  const url = new URL(`/api${path}`, window.location.origin);
   for (const key in req.query) {
     const value = req.query[key]!;
     if (Array.isArray(value)) {

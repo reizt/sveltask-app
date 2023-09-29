@@ -1,5 +1,5 @@
-import { app } from '#/backend/app';
-import type { TMod } from '#/defs/entity';
+import type { TMod } from '#/def/entity';
+import { app } from '#/server/app';
 import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
 
 type Props = {

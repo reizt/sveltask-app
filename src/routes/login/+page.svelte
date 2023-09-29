@@ -4,8 +4,8 @@
   import RegisterButton from '#/client/components/RegisterButton.svelte';
   import { createTranslator } from '#/client/i18n/translator';
   import { i18n } from '#/client/store/i18n';
-  import type { InferBody } from '#/defs/lib/procedure';
-  import { AttemptLogin } from '#/defs/procedures/AttemptLogin';
+  import { IssueCode } from '#/def/endpoint/IssueCode';
+  import type { InferBody } from '#/def/lib/endpoint';
   import { goto } from '$app/navigation';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
@@ -13,14 +13,14 @@
 
   const t = derived(i18n, (v) => createTranslator(v.lang));
 
-  type Input = InferBody<typeof AttemptLogin>;
+  type Input = InferBody<typeof IssueCode>;
 
   let isSubmitting = false;
 
   const onSubmit = async (values: Input) => {
     isSubmitting = true;
     try {
-      await callApi(AttemptLogin, values);
+      await callApi(IssueCode, values);
       await goto('/login/verify');
     } catch (err) {
       console.log(err);
@@ -30,7 +30,7 @@
   };
 
   const { form, isValid } = createForm<Input>({
-    extend: validator({ schema: AttemptLogin.request.body }),
+    extend: validator({ schema: IssueCode.request.body }),
     onSubmit,
   });
 </script>

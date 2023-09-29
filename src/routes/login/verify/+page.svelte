@@ -4,8 +4,8 @@
   import RegisterButton from '#/client/components/RegisterButton.svelte';
   import { createTranslator } from '#/client/i18n/translator';
   import { i18n } from '#/client/store/i18n';
-  import type { InferBody } from '#/defs/lib/procedure';
-  import { VerifyLogin } from '#/defs/procedures/VerifyLogin';
+  import { VerifyLogin } from '#/def/endpoint/VerifyLogin';
+  import type { InferBody } from '#/def/lib/endpoint';
   import { goto } from '$app/navigation';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';

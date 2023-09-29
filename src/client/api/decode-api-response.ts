@@ -1,9 +1,9 @@
-import type { ApiResponse } from '#/defs/lib/api';
-import type { Procedure } from '#/defs/lib/procedure';
+import type { ApiResponse } from '#/def/lib/api';
+import type { Endpoint } from '#/def/lib/endpoint';
 import type { z } from 'zod';
 import type { InferClientOut } from './types';
 
-export const decodeApiResponse = <O extends Procedure>(procedure: O, response: ApiResponse): InferClientOut<O> => {
+export const decodeApiResponse = <O extends Endpoint>(procedure: O, response: ApiResponse): InferClientOut<O> => {
   if (procedure.response.body === undefined) {
     return undefined as unknown as InferClientOut<O>;
   }

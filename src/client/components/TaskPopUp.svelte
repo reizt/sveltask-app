@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createTranslator } from '#/client/i18n/translator';
   import { i18n } from '#/client/store/i18n';
-  import type { TMod } from '#/defs/entity';
+  import type { TMod } from '#/def/entity';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
   import { onMount } from 'svelte';

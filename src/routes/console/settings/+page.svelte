@@ -3,8 +3,8 @@
   import { createTranslator } from '#/client/i18n/translator';
   import { currentUser } from '#/client/store/current-user';
   import { i18n } from '#/client/store/i18n';
-  import type { InferBody } from '#/defs/lib/procedure';
-  import { UpdateCurrentUser } from '#/defs/procedures/UpdateCurrentUser';
+  import { UpdateCurrentUser } from '#/def/endpoint/UpdateCurrentUser';
+  import type { InferBody } from '#/def/lib/endpoint';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
   import { derived } from 'svelte/store';

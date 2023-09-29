@@ -1,9 +1,9 @@
-import type { ApiRequest } from '#/defs/lib/api';
-import type { Procedure } from '#/defs/lib/procedure';
+import type { ApiRequest } from '#/def/lib/api';
+import type { Endpoint } from '#/def/lib/endpoint';
 import { makeRealPath } from './make-real-path';
 import type { InferClientIn } from './types';
 
-export const makeApiRequest = <O extends Procedure>(procedure: O, input: InferClientIn<O>): ApiRequest => {
+export const makeApiRequest = <O extends Endpoint>(procedure: O, input: InferClientIn<O>): ApiRequest => {
   const body: Record<string, any> = {};
   const params: Record<string, string> = {};
   const query: Record<string, string> = {};

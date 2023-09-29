@@ -1,4 +1,4 @@
-import type { Procedure } from '#/defs/lib/procedure';
+import type { Endpoint } from '#/def/lib/endpoint';
 import { z } from 'zod';
 import { makeApiRequest } from './make-api-request';
 import type { InferClientIn } from './types';
@@ -14,7 +14,7 @@ const procedure = {
   response: {
     successCode: 200,
   },
-} satisfies Procedure;
+} satisfies Endpoint;
 const input: InferClientIn<typeof procedure> = {
   paramsKey: 'paramsKey',
   queryKey: 123,
