@@ -1,5 +1,5 @@
 resource "aws_iam_user" "vercel" {
-  name = "todo-app-api-vercel"
+  name = local.iam_user_name
 }
 
 resource "aws_iam_user_policy_attachment" "vercel" {
@@ -8,7 +8,7 @@ resource "aws_iam_user_policy_attachment" "vercel" {
 }
 
 resource "aws_iam_policy" "vercel" {
-  name   = "todo-app-api-vercel"
+  name   = local.iam_policy_name
   policy = data.aws_iam_policy_document.vercel.json
 }
 
@@ -26,8 +26,8 @@ data "aws_iam_policy_document" "vercel" {
       "dynamodb:UpdateItem",
     ]
     resources = [
-      "${data.aws_dynamodb_table.main.arn}",
-      "${data.aws_dynamodb_table.main.arn}/*",
+      "${aws_dynamodb_table.main.arn}",
+      "${aws_dynamodb_table.main.arn}/*",
     ]
   }
 }

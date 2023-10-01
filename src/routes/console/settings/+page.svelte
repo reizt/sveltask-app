@@ -1,5 +1,6 @@
 <script lang="ts">
   import { callApi } from '#/client/api';
+  import HeadTitle from '#/client/components/HeadTitle.svelte';
   import { createTranslator } from '#/client/i18n/translator';
   import { currentUser } from '#/client/store/current-user';
   import { i18n } from '#/client/store/i18n';
@@ -35,15 +36,13 @@
   });
 </script>
 
-<svelte:head>
-  <title>{$t('pages.settings.title')} | TODO APP</title>
-</svelte:head>
+<HeadTitle title={$t('settings.title')} />
 
-<h1 class="text-32 font-bold">{$t('pages.settings.title')}</h1>
+<h1 class="text-32 font-bold">{$t('settings.title')}</h1>
 
 <form use:form>
   <div class="mb-16">
-    <h2 class="mb-6 text-18 font-medium">{$t('pages.settings.your_name')}</h2>
+    <h2 class="mb-6 text-18 font-medium">{$t('settings.your_name')}</h2>
     <input
       type="text"
       name="name"

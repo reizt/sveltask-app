@@ -1,8 +1,8 @@
 import { BatchWriteItemCommand, ScanCommand } from '@aws-sdk/client-dynamodb';
-import { globalConfig as g } from './schema';
-import type { DynamodbContext } from './types';
+import { partitionKeyAttrName } from './config';
+import type { DynamoDBContext } from './context';
 
-export const resetDynamoDB = async (ctx: DynamodbContext) => {
+export const resetDynamoDB = async (ctx: DynamoDBContext) => {
   const scanCommand = new ScanCommand({
     TableName: ctx.tableName,
   });
@@ -15,7 +15,7 @@ export const resetDynamoDB = async (ctx: DynamodbContext) => {
       [ctx.tableName]: scanOutput.Items.map((item) => ({
         DeleteRequest: {
           Key: {
-            [g.partitionKey]: item[g.partitionKey]!,
+            [partitionKeyAttrName]: item[partitionKeyAttrName]!,
           },
         },
       })),

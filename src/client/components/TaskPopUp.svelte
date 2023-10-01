@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createTranslator } from '#/client/i18n/translator';
   import { i18n } from '#/client/store/i18n';
-  import type { TMod } from '#/def/entity';
+  import type { Ent } from '#/def/entity';
   import { validator } from '@felte/validator-zod';
   import { createForm } from 'felte';
   import { onMount } from 'svelte';
@@ -11,7 +11,7 @@
 
   const t = derived(i18n, (v) => createTranslator(v.lang));
 
-  export let task: TMod.Task | null = null;
+  export let task: Ent.Task | null = null;
   export let onSubmit: (values: TaskPopUpInput) => Promise<void>;
   export let onDelete: () => Promise<void> = async () => {};
   export let isDeleting: boolean = false;
@@ -49,13 +49,13 @@
     type="text"
     name="title"
     value={task?.title ?? ''}
-    placeholder={$t('pages.board.untitled')}
+    placeholder={$t('board.untitled')}
     class="bg-background text-24 font-medium"
   />
   <textarea
     name="description"
     value={task?.description ?? ''}
-    placeholder={$t('pages.board.provide_description')}
+    placeholder={$t('board.provide_description')}
     class="w-full grow bg-background text-12 font-light"
   />
   <div class="mt-10 flex justify-end gap-x-4">

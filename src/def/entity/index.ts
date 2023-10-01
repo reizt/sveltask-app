@@ -1,1 +1,1 @@
-export type * as TMod from './type';
+export type * as Ent from './type';

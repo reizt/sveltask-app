@@ -1,6 +1,6 @@
 export type AppSession = Readonly<
   | {
-      type: 'verify';
+      type: 'code';
       email: string;
       codeHash: string;
     }

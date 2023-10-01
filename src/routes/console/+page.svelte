@@ -1,5 +1,6 @@
 <script lang="ts">
   import { callApi } from '#/client/api';
+  import HeadTitle from '#/client/components/HeadTitle.svelte';
   import PopUpMask from '#/client/components/PopUpMask.svelte';
   import TaskAddButton from '#/client/components/TaskAddButton.svelte';
   import TaskCard from '#/client/components/TaskCard.svelte';
@@ -13,7 +14,7 @@
   import { DeleteTask } from '#/def/endpoint/DeleteTask';
   import { GetTasks } from '#/def/endpoint/GetTasks';
   import { UpdateTask } from '#/def/endpoint/UpdateTask';
-  import type { TMod } from '#/def/entity';
+  import type { Ent } from '#/def/entity';
   import { replaceOne } from '#/utils/replace-one';
   import { onMount } from 'svelte';
   import { derived } from 'svelte/store';
@@ -25,18 +26,18 @@
   currentUser.set(data.currentUser);
 
   // Constants
-  $: statuses = ['created', 'progress', 'completed'] satisfies TMod.Task['status'][];
+  $: statuses = ['created', 'progress', 'completed'] satisfies Ent.Task['status'][];
   $: statusLabels = {
     created: $t('enum.task_status.created'),
     progress: $t('enum.task_status.progress'),
     completed: $t('enum.task_status.completed'),
-  } satisfies Record<TMod.Task['status'], string>;
+  } satisfies Record<Ent.Task['status'], string>;
 
   // States
-  let tasks: TMod.Task[] = [];
+  let tasks: Ent.Task[] = [];
   let isLoading: boolean = true;
   let editingId: string | null = null;
-  let addingStatus: TMod.Task['status'] | null = null;
+  let addingStatus: Ent.Task['status'] | null = null;
   let draggingId: string | null = null;
   let isDeleting: boolean = false;
 
@@ -48,7 +49,7 @@
   // Computed
   $: editingTask = editingId != null ? tasks.find((task) => task.id === editingId) ?? null : null;
   $: tasksByStatus = (() => {
-    const map: Record<TMod.Task['status'], TMod.Task[]> = {
+    const map: Record<Ent.Task['status'], Ent.Task[]> = {
       created: [],
       progress: [],
       completed: [],
@@ -60,7 +61,7 @@
   })();
 
   // Functions
-  const openAdd = (status: TMod.Task['status']) => {
+  const openAdd = (status: Ent.Task['status']) => {
     addingStatus = status;
     editingId = null;
   };
@@ -91,10 +92,10 @@
     tasks = replaceOne(tasks, 'id', newTask);
     editingId = null;
   };
-  const updateTaskStatus = async (status: TMod.Task['status']) => {
+  const updateTaskStatus = async (status: Ent.Task['status']) => {
     const draggingTask = tasks.find((task) => task.id === draggingId);
     if (draggingTask == null) return;
-    const newTask: TMod.Task = { ...draggingTask, status };
+    const newTask: Ent.Task = { ...draggingTask, status };
     tasks = replaceOne(tasks, 'id', newTask);
     await callApi(UpdateTask, { id: draggingTask.id, status });
   };
@@ -108,12 +109,10 @@
   };
 </script>
 
-<svelte:head>
-  <title>{$t('pages.board.title')} | TODO APP</title>
-</svelte:head>
+<HeadTitle title={$t('board.title')} />
 
 <div class="mb-20 flex justify-between">
-  <h1 class="text-32 font-bold">{$t('pages.board.title')}</h1>
+  <h1 class="text-32 font-bold">{$t('board.title')}</h1>
   <TaskAddButton
     on:click={() => {
       openAdd('created');

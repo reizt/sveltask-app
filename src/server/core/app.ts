@@ -6,10 +6,12 @@ import { DeleteTask } from './app/DeleteTask.fun';
 import { GetCurrentUser } from './app/GetCurrentUser.fun';
 import { GetTasks } from './app/GetTasks.fun';
 import { IssueCode } from './app/IssueCode.fun';
+import { LogIn } from './app/LogIn.fun';
 import { LogOut } from './app/LogOut.fun';
 import { UpdateCurrentUser } from './app/UpdateCurrentUser.fun';
+import { UpdatePassword } from './app/UpdatePassword.fun';
 import { UpdateTask } from './app/UpdateTask.fun';
-import { VerifyLogin } from './app/VerifyLogin.fun';
+import { VerifyCode } from './app/VerifyCode.fun';
 
 type EndpointId = keyof typeof endpints;
 
@@ -29,8 +31,10 @@ export const createApp = (ctx: Context): ServerApp<typeof endpints> => {
     GetCurrentUser: inject<'GetCurrentUser'>(GetCurrentUser, ctx),
     UpdateCurrentUser: inject<'UpdateCurrentUser'>(UpdateCurrentUser, ctx),
     UpdateTask: inject<'UpdateTask'>(UpdateTask, ctx),
-    VerifyLogin: inject<'VerifyLogin'>(VerifyLogin, ctx),
+    VerifyCode: inject<'VerifyCode'>(VerifyCode, ctx),
     GetTasks: inject<'GetTasks'>(GetTasks, ctx),
     LogOut: inject<'LogOut'>(LogOut, ctx),
+    LogIn: inject<'LogIn'>(LogIn, ctx),
+    UpdatePassword: inject<'UpdatePassword'>(UpdatePassword, ctx),
   };
 };

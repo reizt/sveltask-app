@@ -33,7 +33,7 @@
   </button>
   {#if showDropdown}
     <div class="absolute right-0 top-50 mt-10 w-140 overflow-hidden rounded-6 border-1 border-border bg-background">
-      <a href="/console/settings" class="block px-16 py-10 text-12 hover:bg-accent">{$t('pages.settings.title')}</a>
+      <a href="/console/settings" class="block px-16 py-10 text-12 hover:bg-accent">{$t('settings.title')}</a>
       <button class="block w-full px-16 py-10 text-left text-12 hover:bg-accent" on:click={logOut}>{$t('global.logout')}</button>
     </div>
   {/if}

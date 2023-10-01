@@ -15,29 +15,37 @@ export type Translation = {
     delete: string;
     deleting: string;
     logout: string;
+    done: string;
   };
-  pages: {
-    login: {
-      title: string;
-      welcome_back: string;
-      send_code: string;
-    };
+  login: {
+    title: string;
+    welcome_back: string;
+    login: string;
+    forgot_password: string;
+    back_to_login: string;
+    send_code: string;
     verify: {
       title: string;
       enter_code: string;
       six_digit_code: string;
       verify: string;
     };
-    board: {
-      title: string;
-      new_task: string;
-      untitled: string;
-      provide_description: string;
-    };
-    settings: {
-      title: string;
-      your_name: string;
-    };
+  };
+  password: {
+    title: string;
+    set_new_password: string;
+    password: string;
+    confirm_password: string;
+  };
+  board: {
+    title: string;
+    new_task: string;
+    untitled: string;
+    provide_description: string;
+  };
+  settings: {
+    title: string;
+    your_name: string;
   };
   entity: {
     user: {

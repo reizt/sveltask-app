@@ -4,7 +4,7 @@ import type { Endpoint } from '../lib/endpoint';
 
 export const IssueCode = {
   method: 'post',
-  path: '/attempt-login',
+  path: '/code/issue',
   request: {
     body: z.object({
       email: User.shape.email,

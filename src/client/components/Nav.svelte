@@ -16,12 +16,12 @@
     {
       href: '/console',
       iconName: 'dashboard',
-      title: $t('pages.board.title'),
+      title: $t('board.title'),
     },
     {
       href: '/console/settings',
       iconName: 'settings',
-      title: $t('pages.settings.title'),
+      title: $t('settings.title'),
     },
   ] satisfies Link[];
 </script>

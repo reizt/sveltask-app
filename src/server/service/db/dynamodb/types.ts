@@ -1,7 +1,19 @@
-import type { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import type { EntityConfig } from '#/server/context/db.mold';
 
-export type DynamodbContext = {
-  dynamodb: DynamoDBClient;
-  tableName: string;
+export type DynamoDbDatabaseSchemaOf<T extends Record<string, EntityConfig>> = {
+  [K in keyof T]: DynamoDbEntitySchemaOf<T[K]>;
 };
-export type WithContext<T> = T extends (args: infer A) => infer R ? (ctx: DynamodbContext, args: A) => R : never;
+
+export type DynamoDbEntitySchemaOf<E extends EntityConfig> = {
+  name: string;
+  props: {
+    [P in keyof E]: DynamoDbPropSchema;
+  };
+};
+
+export type DynamoDbPropSchema = {
+  name: string;
+  gsi?: {
+    name: string;
+  };
+};

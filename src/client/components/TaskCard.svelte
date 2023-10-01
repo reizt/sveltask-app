@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { TMod } from '#/def/entity';
+  import type { Ent } from '#/def/entity';
 
-  export let task: TMod.Task;
+  export let task: Ent.Task;
 </script>
 
 <button

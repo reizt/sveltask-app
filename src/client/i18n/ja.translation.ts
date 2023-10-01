@@ -1,3 +1,5 @@
+import type { Translation } from './types';
+
 export const jaTranslation = {
   global: {
     save: '保存する',
@@ -7,29 +9,37 @@ export const jaTranslation = {
     delete: '削除する',
     deleting: '削除中...',
     logout: 'ログアウト',
+    done: '完了',
   },
-  pages: {
-    login: {
-      title: 'ログイン',
-      welcome_back: 'おかえりなさい！',
-      send_code: 'コードを送信',
-    },
+  login: {
+    title: 'ログイン',
+    welcome_back: 'おかえりなさい！',
+    login: 'ログイン',
+    forgot_password: 'パスワードをお忘れですか？',
+    back_to_login: 'ログインに戻る',
+    send_code: 'コードを送信',
     verify: {
       title: 'ログイン',
       enter_code: 'コードを入力',
       six_digit_code: '6桁のコード',
       verify: '確認する',
     },
-    board: {
-      title: 'ダッシュボード',
-      new_task: 'タスクを作成',
-      untitled: '無題',
-      provide_description: '説明を入力...',
-    },
-    settings: {
-      title: '設定',
-      your_name: '名前',
-    },
+  },
+  password: {
+    title: '新しいパスワードを設定',
+    set_new_password: '新しいパスワードを設定',
+    password: 'パスワード',
+    confirm_password: 'パスワードの確認',
+  },
+  board: {
+    title: 'ダッシュボード',
+    new_task: 'タスクを作成',
+    untitled: '無題',
+    provide_description: '説明を入力...',
+  },
+  settings: {
+    title: '設定',
+    your_name: '名前',
   },
   entity: {
     user: {
@@ -45,4 +55,4 @@ export const jaTranslation = {
       completed: '完了',
     },
   },
-} as const;
+} as const satisfies Translation;
