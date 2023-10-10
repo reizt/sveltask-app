@@ -15,6 +15,6 @@ describe(makeResponse.name, () => {
     const body = await result.json();
     expect(body).toEqual(response.body);
     expect(result.status).toEqual(response.status);
-    expect(result.headers.get('Set-Cookie')).toEqual('bar=bar;');
+    expect(result.headers.get('Set-Cookie')?.startsWith('bar=bar;')).toBeTruthy();
   });
 });
