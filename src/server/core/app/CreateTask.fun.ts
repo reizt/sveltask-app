@@ -6,7 +6,7 @@ import { newId } from '#/server/core/modules/identify';
 export const CreateTask: ServerFun<'CreateTask'> = async (input, ctx) => {
   const currentUser = await authenticateToken({ authToken: input.authToken }, ctx);
 
-  const task = await ctx.db.task.put({
+  const task = await ctx.db.task.create({
     id: newId(),
     createdAt: timestamp(),
     updatedAt: timestamp(),

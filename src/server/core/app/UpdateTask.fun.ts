@@ -10,7 +10,7 @@ export const UpdateTask: ServerFun<'UpdateTask'> = async (input, ctx) => {
     throw new Error('task not found');
   }
 
-  const updatedTask = await ctx.db.task.put({
+  const updatedTask = await ctx.db.task.update({
     ...task,
     title: input.title ?? task.title,
     description: input.description ?? task.description,

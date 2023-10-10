@@ -23,7 +23,7 @@ export const VerifyCode: ServerFun<'VerifyCode'> = async (input, ctx) => {
   });
   console.log('user', user);
   if (user == null) {
-    user = await ctx.db.user.put({
+    user = await ctx.db.user.create({
       id: newId(),
       createdAt: timestamp(),
       updatedAt: timestamp(),
