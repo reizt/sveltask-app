@@ -10,5 +10,5 @@ export const DeleteTask: ServerFun<'DeleteTask'> = async (input, ctx) => {
     throw new Error('task not found');
   }
 
-  await ctx.db.task.del(task.id);
+  await ctx.db.task.del(task.__dynmrId);
 };

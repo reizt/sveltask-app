@@ -12,10 +12,11 @@ export type InferServerIn<T extends Endpoint> = OptionalInfer<T['request']['body
 
 type ResponseBodyOf<T extends Endpoint> = T['response']['body'];
 type ResponseCookiesOf<T extends Endpoint> = T['response']['cookies'];
-export type InferServerOut<T extends Endpoint> = ResponseBodyOf<T> extends z.ZodTypeAny
-  ? ResponseCookiesOf<T> extends z.ZodTypeAny
-    ? z.infer<ResponseBodyOf<T>> & z.infer<ResponseCookiesOf<T>>
-    : z.infer<ResponseBodyOf<T>>
-  : ResponseCookiesOf<T> extends z.ZodTypeAny
-  ? z.infer<ResponseCookiesOf<T>>
-  : void;
+export type InferServerOut<T extends Endpoint> =
+  ResponseBodyOf<T> extends z.ZodTypeAny
+    ? ResponseCookiesOf<T> extends z.ZodTypeAny
+      ? z.infer<ResponseBodyOf<T>> & z.infer<ResponseCookiesOf<T>>
+      : z.infer<ResponseBodyOf<T>>
+    : ResponseCookiesOf<T> extends z.ZodTypeAny
+      ? z.infer<ResponseCookiesOf<T>>
+      : void;

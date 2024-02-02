@@ -25,7 +25,7 @@ export const parseEvent = async <K extends string>(
     body = null;
   }
   for (const procedureId in endpints) {
-    const procedure = endpints[procedureId]!;
+    const procedure = endpints[procedureId];
     if (method.toLowerCase() !== procedure.method.toLowerCase()) continue;
     const regexp = makePathRegExp(procedure.path);
     const match = path.match(regexp);

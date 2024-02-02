@@ -16,7 +16,7 @@
   import { UpdateTask } from '#/def/endpoint/UpdateTask';
   import type { Ent } from '#/def/entity';
   import { replaceOne } from '#/utils/replace-one';
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { derived } from 'svelte/store';
   import type { PageData } from './$types';
 
@@ -39,11 +39,28 @@
   let editingId: string | null = null;
   let addingStatus: Ent.Task['status'] | null = null;
   let draggingId: string | null = null;
+  let deletingTaskIds: string[] = [];
   let isDeleting: boolean = false;
 
+  const makeTaskElementId = (task: Ent.Task) => `task-${task.id}`;
+
+  const keydownHandler = (e: KeyboardEvent) => {
+    if (e.ctrlKey && e.key === 'n') {
+      openAdd('created');
+    }
+  };
   onMount(async () => {
     tasks = await callApi(GetTasks, {});
     isLoading = false;
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', keydownHandler);
+    }
+  });
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('keydown', keydownHandler);
+    }
   });
 
   // Computed
@@ -67,7 +84,10 @@
   };
   const handleKeydown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      if (editingId != null) editingId = null;
+      if (editingId != null) {
+        editingId = null;
+        document.getElementById(makeTaskElementId(editingTask!))?.focus();
+      }
       if (addingStatus != null) addingStatus = null;
     }
   };
@@ -80,6 +100,7 @@
     });
     tasks = [...tasks, newTask];
     addingStatus = null;
+    window.setTimeout(() => document.getElementById(makeTaskElementId(newTask))?.focus(), 0) // wait for DOM update
   };
   const updateTask = async (values: TaskPopUpInput) => {
     if (editingTask == null) return;
@@ -91,6 +112,7 @@
     });
     tasks = replaceOne(tasks, 'id', newTask);
     editingId = null;
+    window.setTimeout(() => document.getElementById(makeTaskElementId(newTask))?.focus(), 0) // wait for DOM update
   };
   const updateTaskStatus = async (status: Ent.Task['status']) => {
     const draggingTask = tasks.find((task) => task.id === draggingId);
@@ -102,10 +124,18 @@
   const deleteTask = async () => {
     if (editingTask == null) return;
     isDeleting = true;
+    deletingTaskIds = [...deletingTaskIds, editingTask.id];
     await callApi(DeleteTask, { id: editingTask.id });
     tasks = tasks.filter((task) => task.id !== editingTask!.id);
     editingId = null;
     isDeleting = false;
+    deletingTaskIds = deletingTaskIds.filter((id) => id !== editingTask!.id);
+  };
+  const deleteTaskById = async (id: string) => {
+    deletingTaskIds = [...deletingTaskIds, id];
+    tasks = tasks.filter((task) => task.id !== id);
+    await callApi(DeleteTask, { id });
+    deletingTaskIds = deletingTaskIds.filter((taskId) => taskId !== id);
   };
 </script>
 
@@ -137,7 +167,19 @@
         <TaskCardSkeleton />
       {:else}
         {#each tasksByStatus[status] as task (task.id)}
-          <TaskCard {task} on:click={() => (editingId = task.id)} on:dragstart={() => (draggingId = task.id)} />
+          <TaskCard
+            id={makeTaskElementId(task)}
+            isDeleting={deletingTaskIds.includes(task.id)}
+            {task}
+            on:click={() => (editingId = task.id)}
+            on:dragstart={() => (draggingId = task.id)}
+            on:keydown={(e) => {
+              console.log(e.key)
+              if (e.key === 'Backspace') {
+                deleteTaskById(task.id);
+              }
+            }}
+          />
         {/each}
       {/if}
     </div>
