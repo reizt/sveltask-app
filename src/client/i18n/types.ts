@@ -21,6 +21,7 @@ export type Translation = {
     title: string;
     welcome_back: string;
     login: string;
+    login_or_create_account: string;
     forgot_password: string;
     back_to_login: string;
     send_code: string;

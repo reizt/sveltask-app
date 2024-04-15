@@ -62,7 +62,7 @@
       <div class="flex justify-end mb-10">
         <a href="/login/email" class="text-12 text-primary hover:opacity-75">{$t('login.forgot_password')}</a>
       </div>
-      <RegisterButton disabled={!$isValid || isSubmitting} loading={isSubmitting}>{$t('login.login')}</RegisterButton>
+      <RegisterButton disabled={!$isValid || isSubmitting} loading={isSubmitting}>{$t('login.login_or_create_account')}</RegisterButton>
     </form>
   </div>
 </div>

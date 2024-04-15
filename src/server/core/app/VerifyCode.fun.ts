@@ -6,7 +6,6 @@ import { newId } from '#/server/core/modules/identify';
 export const VerifyCode: ServerFun<'VerifyCode'> = async (input, ctx) => {
   const session = await ctx.signer.verify(input.authToken);
 
-  console.log('session', session);
   if (session.type !== 'code') {
     throw new Error('invalid code');
   }
@@ -15,13 +14,11 @@ export const VerifyCode: ServerFun<'VerifyCode'> = async (input, ctx) => {
   if (!isCorrectCode) {
     throw new Error('invalid code');
   }
-  console.log('isCorrectCode', isCorrectCode);
 
   let user: Ent.User | null;
   user = await ctx.db.user.pick({
     where: { email: { eq: session.email } },
   });
-  console.log('user', user);
   if (user == null) {
     user = await ctx.db.user.create({
       id: newId(),
@@ -31,7 +28,6 @@ export const VerifyCode: ServerFun<'VerifyCode'> = async (input, ctx) => {
       name: '',
     });
   }
-  console.log('user', user);
 
   const authToken = await ctx.signer.sign({ type: 'login', userId: user.id });
   return { authToken };

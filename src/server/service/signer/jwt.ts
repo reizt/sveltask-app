@@ -22,13 +22,7 @@ export class JwtSigner implements ISigner {
       return decoded as AppSession;
     } catch (err) {
       if (err instanceof jwt.TokenExpiredError) {
-        console.log('TokenExpiredError');
-      }
-      if (err instanceof jwt.JsonWebTokenError) {
-        console.log('JsonWebTokenError', err);
-      }
-      if (err instanceof jwt.NotBeforeError) {
-        console.log('NotBeforeError');
+        console.log('jwt token expired');
       }
       throw err;
     }

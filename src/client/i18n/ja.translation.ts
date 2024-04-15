@@ -15,6 +15,7 @@ export const jaTranslation = {
     title: 'ログイン',
     welcome_back: 'おかえりなさい！',
     login: 'ログイン',
+    login_or_create_account: 'ログインまたはアカウントを作成',
     forgot_password: 'パスワードをお忘れですか？',
     back_to_login: 'ログインに戻る',
     send_code: 'コードを送信',

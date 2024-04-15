@@ -15,6 +15,7 @@ export const enTranslation = {
     title: 'Log In',
     welcome_back: 'Welcome Back!',
     login: 'Log in',
+    login_or_create_account: 'Log in or create an account',
     forgot_password: 'Forgot Password?',
     back_to_login: 'Back to Log In',
     send_code: 'Send Code',
