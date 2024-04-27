@@ -1,0 +1,39 @@
+on:
+  push:
+    branches:
+      - main
+env:
+  REGION: ap-northeast-1
+  REPO_ROOT: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com
+  REPO_NAME: sveltask-app
+  FUNCTION_NAME: sveltask-app
+  IAM_ROLE: sveltask-actions-oidc
+jobs:
+  update:
+    runs-on: ubuntu-22.04
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        id: node-modules-cache
+        env:
+          cache-name: node-modules-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ env.IAM_ROLE }}
+      - run: echo "TAG=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+      - run: echo "image uri - $REPO_ROOT/$REPO_NAME:$TAG"
+      - run: docker build . -t $REPO_ROOT/$REPO_NAME:$TAG
+      - run: aws ecr get-login-password --region ${{ env.REGION }} | docker login --username AWS --password-stdin $REPO_ROOT
+      - run: docker push $REPO_ROOT/$REPO_NAME:$TAG
+      - run: aws lambda update-function-code --function-name $FUNCTION_NAME --image-uri $REPO_ROOT/$REPO_NAME:$TAG
+      - run: aws apigateway create-deployment --rest-api-id ${{ secrets.REST_API_ID }} --stage-name ${{ secrets.STAGE_NAME }}

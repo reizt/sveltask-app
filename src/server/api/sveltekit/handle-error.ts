@@ -12,5 +12,7 @@ export const handleError = (err: unknown): Response => {
     return new Response(err.message, { status: 500 });
   }
 
+  console.log(err);
+
   return new Response('unexpected error', { status: 500 });
 };
