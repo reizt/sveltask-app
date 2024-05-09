@@ -7,7 +7,7 @@ env:
   REPO_ROOT: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com
   REPO_NAME: sveltask-app
   FUNCTION_NAME: sveltask-app
-  IAM_ROLE: sveltask-actions-oidc
+  IAM_ROLE: sveltask-gha-oidc
 jobs:
   update:
     runs-on: ubuntu-22.04
