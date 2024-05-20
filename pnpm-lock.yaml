@@ -93,9 +93,9 @@ importers:
       eslint-plugin-tailwindcss:
         specifier: ^3.14.1
         version: 3.14.1(tailwindcss@3.4.1)
-      husky:
-        specifier: ^8.0.3
-        version: 8.0.3
+      lefthook:
+        specifier: ^1.6.12
+        version: 1.6.12
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -1799,11 +1799,6 @@ packages:
     resolution: {integrity: sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==}
     engines: {node: '>= 0.8'}
 
-  husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
-    hasBin: true
-
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -1984,6 +1979,50 @@ packages:
 
   known-css-properties@0.29.0:
     resolution: {integrity: sha512-Ne7wqW7/9Cz54PDt4I3tcV+hAyat8ypyOGzYRJQfdxnnjeWsTxt1cy8pjvvKeI5kfXuyvULyeeAvwvvtAX3ayQ==}
+
+  lefthook-darwin-arm64@1.6.12:
+    resolution: {integrity: sha512-IJa50i+78nGxtSvnxLSDfSjBjjM7Ixl03V4+yl3Kdn+S+FwzEZet3LYTLbnKFUVy9Bg23obI3yXgwUx+tJjFXg==}
+    cpu: [arm64]
+    os: [darwin]
+
+  lefthook-darwin-x64@1.6.12:
+    resolution: {integrity: sha512-h11ByUtwM78FShgWgSUyyZtwKW6pjYfYvTygw24c/lZXKjupfowK5Ps5A73hCsjr0AEJNVpgW1S5Jd22gIJJCA==}
+    cpu: [x64]
+    os: [darwin]
+
+  lefthook-freebsd-arm64@1.6.12:
+    resolution: {integrity: sha512-Aw1+AosL8r/LFSVKG7i8GI1FpHnWFG66/6DBDUgCwNAwhNCXt7tERAM8dj9S6EqmqHCQCC0nI/6qKNBsFPk7Ow==}
+    cpu: [arm64]
+    os: [freebsd]
+
+  lefthook-freebsd-x64@1.6.12:
+    resolution: {integrity: sha512-G8Dg7UuRstXrqaEA8MSOZikz6PpjPUQu3QmiihzcyGdzI76jFsmjJb2vkrnvMsH9u2gWb3J4sp3TULhbMHXwSw==}
+    cpu: [x64]
+    os: [freebsd]
+
+  lefthook-linux-arm64@1.6.12:
+    resolution: {integrity: sha512-fwO0i6x5EPelL66EwaySzGzvVbN2vLFZDUWuTi8nZzEgBsCBuG0mORxZg91cNCGLRPT3sgzWPraTkyzIJa7kHg==}
+    cpu: [arm64]
+    os: [linux]
+
+  lefthook-linux-x64@1.6.12:
+    resolution: {integrity: sha512-pRAZKZhSoirjRwDF0TrqxgkeXtUmJqaUi0kGmMJmutToqo9IXQcnpueVmyV9Z1m6lLJn4PpKoFydY6tFXqvyNQ==}
+    cpu: [x64]
+    os: [linux]
+
+  lefthook-windows-arm64@1.6.12:
+    resolution: {integrity: sha512-jMMIoqNKtiqGrwyWeN3JXGXi7H7iAXsGB5v4DkcUbdw9y50qhruxWz84I2PoxwYmZVeMxRR+VpYvS7nOvBmzWA==}
+    cpu: [arm64]
+    os: [win32]
+
+  lefthook-windows-x64@1.6.12:
+    resolution: {integrity: sha512-XqEBVIhp/Fd1Fs+VBlPhrSJlUkyXEJuxQmiYSYow3C18RNpQQrJFVFpz0wE/IDTn2jOXx+p5+hcdlJb+s6bnpA==}
+    cpu: [x64]
+    os: [win32]
+
+  lefthook@1.6.12:
+    resolution: {integrity: sha512-SoHhB0L1D5twH5KKsGAT1h4qF+RhGfPo/JC5z60H0RDuFWtSwFNOeFpT4Qa7XwM6J9c1fvqZzOH9/4XF7dG9Uw==}
+    hasBin: true
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -5474,8 +5513,6 @@ snapshots:
       statuses: 2.0.1
       toidentifier: 1.0.1
 
-  husky@8.0.3: {}
-
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -5655,6 +5692,41 @@ snapshots:
   kleur@4.1.5: {}
 
   known-css-properties@0.29.0: {}
+
+  lefthook-darwin-arm64@1.6.12:
+    optional: true
+
+  lefthook-darwin-x64@1.6.12:
+    optional: true
+
+  lefthook-freebsd-arm64@1.6.12:
+    optional: true
+
+  lefthook-freebsd-x64@1.6.12:
+    optional: true
+
+  lefthook-linux-arm64@1.6.12:
+    optional: true
+
+  lefthook-linux-x64@1.6.12:
+    optional: true
+
+  lefthook-windows-arm64@1.6.12:
+    optional: true
+
+  lefthook-windows-x64@1.6.12:
+    optional: true
+
+  lefthook@1.6.12:
+    optionalDependencies:
+      lefthook-darwin-arm64: 1.6.12
+      lefthook-darwin-x64: 1.6.12
+      lefthook-freebsd-arm64: 1.6.12
+      lefthook-freebsd-x64: 1.6.12
+      lefthook-linux-arm64: 1.6.12
+      lefthook-linux-x64: 1.6.12
+      lefthook-windows-arm64: 1.6.12
+      lefthook-windows-x64: 1.6.12
 
   levn@0.4.1:
     dependencies:

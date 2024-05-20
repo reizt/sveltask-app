@@ -100,7 +100,7 @@
     });
     tasks = [...tasks, newTask];
     addingStatus = null;
-    window.setTimeout(() => document.getElementById(makeTaskElementId(newTask))?.focus(), 0) // wait for DOM update
+    window.setTimeout(() => document.getElementById(makeTaskElementId(newTask))?.focus(), 0); // wait for DOM update
   };
   const updateTask = async (values: TaskPopUpInput) => {
     if (editingTask == null) return;
@@ -112,7 +112,7 @@
     });
     tasks = replaceOne(tasks, 'id', newTask);
     editingId = null;
-    window.setTimeout(() => document.getElementById(makeTaskElementId(newTask))?.focus(), 0) // wait for DOM update
+    window.setTimeout(() => document.getElementById(makeTaskElementId(newTask))?.focus(), 0); // wait for DOM update
   };
   const updateTaskStatus = async (status: Ent.Task['status']) => {
     const draggingTask = tasks.find((task) => task.id === draggingId);
@@ -174,7 +174,7 @@
             on:click={() => (editingId = task.id)}
             on:dragstart={() => (draggingId = task.id)}
             on:keydown={(e) => {
-              console.log(e.key)
+              console.log(e.key);
               if (e.key === 'Backspace') {
                 deleteTaskById(task.id);
               }
