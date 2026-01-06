@@ -64,7 +64,7 @@
   });
 
   // Computed
-  $: editingTask = editingId != null ? tasks.find((task) => task.id === editingId) ?? null : null;
+  $: editingTask = editingId != null ? (tasks.find((task) => task.id === editingId) ?? null) : null;
   $: tasksByStatus = (() => {
     const map: Record<Ent.Task['status'], Ent.Task[]> = {
       created: [],
